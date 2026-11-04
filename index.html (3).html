@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE PROPERTY - Global Real Estate Platform</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --success: #16a34a;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--accent); padding-bottom: 15px; }
+        header h1 { color: var(--primary); font-size: 2.5rem; letter-spacing: 1px; }
+        header p { color: #64748b; font-size: 1rem; margin-top: 5px; }
+        .counter-box { display: flex; justify-content: space-around; background: #eff6ff; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #bfdbfe; }
+        .counter-item { text-align: center; }
+        .counter-item span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+        .counter-item label { font-size: 0.85rem; color: #64748b; text-transform: uppercase; }
+        h2 { font-size: 1.3rem; margin: 20px 0 10px 0; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: #475569; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #fff; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+        .checkbox-item input { width: auto; }
+        .paywall-notice { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 15px; margin-top: 25px; }
+        .paywall-notice h3 { color: #be123c; font-size: 1.1rem; margin-bottom: 5px; }
+        .paywall-notice p { font-size: 0.9rem; color: #9f1239; line-height: 1.4; }
+        .btn { display: block; width: 100%; background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
+        .btn:hover { background: #1d4ed8; }
+        @media(max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>ACE PROPERTY</h1>
+        <p>Global Real Estate Platform & Property Registration Network</p>
+    </header>
+
+    <!-- Interactive Counter Feature -->
+    <div class="counter-box">
+        <div class="counter-item">
+            <span id="count-total">1,248</span>
+            <label>Total Properties</label>
+        </div>
+        <div class="counter-item">
+            <span id="count-commercial">412</span>
+            <label>Commercial</label>
+        </div>
+        <div class="counter-item">
+            <span id="count-domestic">685</span>
+            <label>Domestic/Residential</label>
+        </div>
+        <div class="counter-item">
+            <span id="count-industrial">151</span>
+            <label>Industrial</label>
+        </div>
+    </div>
+
+    <form id="propertyForm" onsubmit="handleSubmit(event)">
+        
+        <h2>1. User Type & Category</h2>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>I am a:</label>
+                <select required id="userType">
+                    <option value="">Select Account Role</option>
+                    <option value="seller">Seller / Landlord</option>
+                    <option value="buyer">Buyer / Investor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Property Category</label>
+                <select required id="category">
+                    <option value="">Select Category</option>
+                    <option value="commercial">Commercial (Shops, Plazas, Offices)</option>
+                    <option value="domestic">Domestic / Residential (Houses, Flats, Plots)</option>
+                    <option value="industrial">Industrial (Factories, Warehouses, Land)</option>
+                    <option value="agricultural">Agricultural Land / Farm Houses</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>2. Owner Information (Paywalled Field)</h2>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label>Contact Number (Hidden from Public)</label>
+                <input type="tel" required placeholder="e.g., 03XXXXXXXXX or international format">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Exact Property Address (Hidden from Public)</label>
+            <textarea rows="2" required placeholder="House number, Street, Block, Area details..."></textarea>
+        </div>
+
+        <h2>3. Location & Accessibility (Public)</h2>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Main Road Approach</label>
+                <input type="text" required placeholder="e.g., Main Boulevard, GT Road">
+            </div>
+            <div class="form-group">
+                <label>Link Road / Street Width</label>
+                <input type="text" placeholder="e.g., 40 Feet Street, 20 Feet Link Road">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Approach Type</label>
+                <input type="text" placeholder="e.g., Corner Property, Frontage, Double Road">
+            </div>
+            <div class="form-group">
+                <label>Conveyance & Transport Availability</label>
+                <input type="text" placeholder="e.g., Easy Cargo access, Bus stop nearby, Metro approach">
+            </div>
+        </div>
+
+        <h2>4. Property Dimensions & Structure</h2>
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Total Area Size</label>
+                <input type="text" required placeholder="e.g., 5 Marla, 1 Kanal, 200 Sq Yds">
+            </div>
+            <div class="form-group">
+                <label>Covered Area Size</label>
+                <input type="text" placeholder="e.g., 1800 Sq Ft, Fully Covered">
+            </div>
+            <div class="form-group">
+                <label>Total Floors</label>
+                <input type="number" min="0" placeholder="e.g., Basement + 2 Floors">
+            </div>
+        </div>
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Number of Rooms</label>
+                <input type="number" min="0" placeholder="0 if commercial open hall">
+            </div>
+            <div class="form-group">
+                <label>Number of Baths</label>
+                <input type="number" min="0" placeholder="Number of bathrooms">
+            </div>
+            <div class="form-group">
+                <label>Number of Kitchens</label>
+                <input type="number" min="0" placeholder="Number of kitchens">
+            </div>
+        </div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Number of Commercial Shops (If any)</label>
+                <input type="number" min="0" placeholder="Number of built-in shops">
+            </div>
+            <div class="form-group">
+                <label>Property Condition</label>
+                <select required>
+                    <option value="fresh">Fresh Construction / Brand New / Newly Repaired</option>
+                    <option value="old">Old Construction / Needs Renovation</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>5. Utilities & Material Quality</h2>
+        <label>Available Utilities</label>
+        <div class="checkbox-group form-group">
+            <div class="checkbox-item"><input type="checkbox" id="util_elec"><label for="util_elec">Electricity Meter</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="util_solar"><label for="util_solar">Solar System Installed</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="util_gas"><label for="util_gas">Sui Gas</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="util_sew"><label for="util_sew">Sewerage System</label></div>
+        </div>
+
+        <label>Material Qualities & Finishings</label>
+        <div class="checkbox-group form-group">
+            <div class="checkbox-item"><input type="checkbox" id="mat_tiles"><label for="mat_tiles">Premium Tiles Flooring</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="mat_stone"><label for="mat_stone">Marble / Stone Work</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="mat_plaster"><label for="mat_plaster">Complete Plaster Finish</label></div>
+        </div>
+
+        <h2>6. Media Uploads & Google Map Tagging</h2>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Upload Property Pictures</label>
+                <input type="file" multiple accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Upload Video Clip Option</label>
+                <input type="file" accept="video/*">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Google Maps Location Pinned Coordinate Tag</label>
+            <input type="text" required placeholder="Paste Google Maps Link or Latitude, Longitude (e.g., 31.4504, 73.1350)">
+        </div>
+
+        <h2>7. Pricing & Payment Schedule</h2>
+        <div class="grid-3">
+            <div class="form-group">
+                <label>Total Demand Range</label>
+                <input type="text" required placeholder="e.g., 1.5 Crore PKR / $55,000">
+            </div>
+            <div class="form-group">
+                <label>Installments Available?</label>
+                <select id="installments" required>
+                    <option value="no">No - Cash payment only</option>
+                    <option value="yes">Yes - Installment plan available</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Payment Time Frame Limit</label>
+                <input type="text" placeholder="e.g., 2 Years Plan, 6 Months Lump Sum">
+            </div>
+        </div>
+
+        <div class="paywall-notice">
+            <h3>🔒 Global Contact Paywall Protection Enabled</h3>
+            <p>
+                By registering, you acknowledge that buyer and seller phone numbers and structural addresses remain hidden globally. 
+                To instantly clear security restrictions and unlock full client details, a verification payment of 
+                <strong>PKR 2,500 via JazzCash / EasyPaisa to 03006604229</strong> (or <strong>$25 USD via international transfer</strong> for global clients) is required.
+            </p>
+        </div>
+
+        <button type="submit" class="btn">Register Property Globally</button>
+    </form>
+</div>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('Success! Your property listing has been registered on the global ACE PROPERTY database. Contact info is locked until your payment to 03006604229 / $25 is verified.');
+        
+        // Simple client-side counter increase simulation
+        const totalElem = document.getElementById('count-total');
+        let currentTotal = parseInt(totalElem.innerText.replace(/,/g, ''));
+        totalElem.innerText = (currentTotal + 1).toLocaleString();
+        
+        const cat = document.getElementById('category').value;
+        if(cat) {
+            const catElem = document.getElementById('count-' + cat);
+            if(catElem) {
+                let currentCat = parseInt(catElem.innerText);
+                catElem.innerText = currentCat + 1;
+            }
+        }
+        document.getElementById('propertyForm').reset();
+    }
+</script>
+
+</body>
+</html>
