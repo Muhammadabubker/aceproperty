@@ -1,279 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACE PROPERTY - Global Real Estate Platform</title>
-    <style>
-        :root {
-            --primary: #0f172a;
-            --accent: #2563eb;
-            --success: #16a34a;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #334155;
-            --border: #e2e8f0;
-        }
-css
-.caution-box {
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 4px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-}
-        <div class="caution-box">
-  <strong>⚠️ Caution:</strong> 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--accent); padding-bottom: 15px; }
-        header h1 { color: var(--primary); font-size: 2.5rem; letter-spacing: 1px; }
-        header p { color: #64748b; font-size: 1rem; margin-top: 5px; }
-        .counter-box { display: flex; justify-content: space-around; background: #eff6ff; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #bfdbfe; }
-        .counter-item { text-align: center; }
-        .counter-item span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
-        .counter-item label { font-size: 0.85rem; color: #64748b; text-transform: uppercase; }
-        h2 { font-size: 1.3rem; margin: 20px 0 10px 0; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: #475569; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #fff; outline: none; }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 8px; }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-        .checkbox-item input { width: auto; }
-        .paywall-notice { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 15px; margin-top: 25px; }
-        .paywall-notice h3 { color: #be123c; font-size: 1.1rem; margin-bottom: 5px; }
-        .paywall-notice p { font-size: 0.9rem; color: #9f1239; line-height: 1.4; }
-        .btn { display: block; width: 100%; background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
-        .btn:hover { background: #1d4ed8; }
-        @media(max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>ACE PROPERTY - Direct Owners Contact | No Commission</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --success: #16a34a;
+      --warning: #d97706;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
+    header {
+      background: var(--primary); color: #fff; padding: 1.5rem 1rem; text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+    header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
+    header p { margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.95rem; }
+    .badge-bar {
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem;
+    }
+    .badge {
+      background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;
+    }
+    .container { max-width: 1000px; margin: 1.5rem auto; padding: 0 1rem; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tab-btn {
+      flex: 1; padding: 0.9rem; border: none; border-radius: 8px; font-weight: 700;
+      cursor: pointer; background: #e2e8f0; color: var(--text); font-size: 1rem;
+    }
+    .tab-btn.active { background: var(--accent); color: #fff; }
+    .card {
+      background: var(--card); border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+    }
+    h2 {
+      border-left: 4px solid var(--accent); padding-left: 0.75rem;
+      font-size: 1.2rem; color: var(--primary); margin-top: 1.5rem;
+    }
+    h2:first-child { margin-top: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.3rem; }
+    input, select, textarea {
+      width: 100%; padding: 0.65rem; border: 1px solid var(--border);
+      border-radius: 6px; font-size: 0.95rem;
+    }
+    .checkbox-group {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.6rem; margin-top: 0.4rem;
+    }
+    .checkbox-group label {
+      display: flex; align-items: center; gap: 0.5rem; font-weight: 500;
+      background: #f8fafc; padding: 0.5rem; border-radius: 6px; border: 1px solid #e2e8f0; cursor: pointer;
+    }
+    .checkbox-group input { width: auto; }
+    .paywall-box {
+      background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;
+    }
+    .btn-submit {
+      width: 100%; padding: 1rem; background: var(--success); color: #fff; border: none;
+      border-radius: 8px; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-top: 1rem;
+    }
+    .btn-submit:hover { background: #15803d; }
+
+    /* Property Cards */
+    .prop-card {
+      border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; background: #fff;
+    }
+    .prop-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .prop-tag { background: #dbeafe; color: #1e40af; padding: 0.25rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; }
+    .prop-price { font-size: 1.25rem; font-weight: 800; color: var(--success); }
+    .prop-specs {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; font-size: 0.85rem; color: var(--muted);
+    }
+    .prop-specs span { background: #f1f5f9; padding: 0.25rem 0.6rem; border-radius: 4px; }
+    .media-preview { display: flex; gap: 0.5rem; overflow-x: auto; margin: 0.8rem 0; }
+    .media-preview img { height: 90px; width: 120px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1; }
+    .locked-box {
+      background: #f8fafc; border: 1px dashed #94a3b8; padding: 0.9rem; border-radius: 8px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;
+    }
+    .blur-text { filter: blur(5px); user-select: none; font-weight: 700; }
+    .btn-unlock {
+      background: var(--warning); color: #fff; border: none; padding: 0.6rem 1rem;
+      border-radius: 6px; font-weight: 700; cursor: pointer;
+    }
+
+    /* Modal */
+    .modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+      align-items: center; justify-content: center; padding: 1rem; z-index: 1000;
+    }
+    .modal-content {
+      background: #fff; max-width: 440px; width: 100%; border-radius: 12px; padding: 1.5rem;
+    }
+    footer {
+      text-align: center; padding: 1.5rem; background: var(--primary); color: #94a3b8; font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>ACE PROPERTY</h1>
-        <p>Global Real Estate Platform & Property Registration Network</p>
-    </header>
+<header>
+  <h1>ACE PROPERTY</h1>
+  <p>Global Direct-Owner Real Estate Network — 0% Commission</p>
+  <div class="badge-bar">
+    <span class="badge">🌍 Global Listings</span>
+    <span class="badge">📍 Google Maps Tagged</span>
+    <span class="badge">👁️ Live Visitors: <strong id="visitorCount">1,420</strong></span>
+  </div>
+</header>
 
-    <!-- Interactive Counter Feature -->
-    <div class="counter-box">
-        <div class="counter-item">
-            <span id="count-total">1,248</span>
-            <label>Total Properties</label>
-        </div>
-        <div class="counter-item">
-            <span id="count-commercial">412</span>
-            <label>Commercial</label>
-        </div>
-        <div class="counter-item">
-            <span id="count-domestic">685</span>
-            <label>Domestic/Residential</label>
-        </div>
-        <div class="counter-item">
-            <span id="count-industrial">151</span>
-            <label>Industrial</label>
-        </div>
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('listings')">🏢 Browse Listed Properties (<span id="propTotal">1</span>)</button>
+    <button class="tab-btn" onclick="switchTab('register')">➕ Register Property / Buyer Request</button>
+  </div>
+
+  <!-- TAB 1: LIVE PROPERTY LISTINGS -->
+  <div id="tab-listings">
+    <div class="card" style="padding: 1rem;">
+      <div class="grid">
+        <select id="filterCategory" onchange="renderProperties()">
+          <option value="ALL">All Categories</option>
+          <option value="Commercial">Commercial (Shops, Plazas, Offices)</option>
+          <option value="Domestic / Residential">Domestic / Residential (Houses, Flats, Plots)</option>
+          <option value="Industrial">Industrial (Factories, Warehouses, Land)</option>
+          <option value="Agricultural">Agricultural Land / Farm Houses</option>
+        </select>
+        <select id="filterRole" onchange="renderProperties()">
+          <option value="ALL">All Roles (Sellers & Buyers)</option>
+          <option value="Seller / Landlord">Direct Sellers / Landlords</option>
+          <option value="Buyer / Investor">Direct Buyers / Investors</option>
+        </select>
+      </div>
     </div>
 
-    <form id="propertyForm" onsubmit="handleSubmit(event)">
-        
-        <h2>1. User Type & Category</h2>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>I am a:</label>
-                <select required id="userType">
-                    <option value="">Select Account Role</option>
-                    <option value="seller">Seller / Landlord</option>
-                    <option value="buyer">Buyer / Investor</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Property Category</label>
-                <select required id="category">
-                    <option value="">Select Category</option>
-                    <option value="commercial">Commercial (Shops, Plazas, Offices)</option>
-                    <option value="domestic">Domestic / Residential (Houses, Flats, Plots)</option>
-                    <option value="industrial">Industrial (Factories, Warehouses, Land)</option>
-                    <option value="agricultural">Agricultural Land / Farm Houses</option>
-                </select>
-            </div>
-        </div>
+    <div id="propertyFeed"></div>
+  </div>
 
-        <h2>2. Owner Information (Paywalled Field)</h2>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" required placeholder="Enter your full name">
-            </div>
-            <div class="form-group">
-                <label>Contact Number (Hidden from Public)</label>
-                <input type="tel" required placeholder="e.g., 03XXXXXXXXX or international format">
-            </div>
+  <!-- TAB 2: REGISTRATION FORM -->
+  <div id="tab-register" style="display:none;">
+    <form id="aceForm" class="card" onsubmit="submitProperty(event)">
+      <h2>1. User Type & Category</h2>
+      <div class="grid">
+        <div>
+          <label>I am a: *</label>
+          <select id="role" required>
+            <option value="Seller / Landlord">Seller / Landlord (Direct Owner)</option>
+            <option value="Buyer / Investor">Buyer / Investor</option>
+          </select>
         </div>
-        <div class="form-group">
-            <label>Exact Property Address (Hidden from Public)</label>
-            <textarea rows="2" required placeholder="House number, Street, Block, Area details..."></textarea>
+        <div>
+          <label>Property Category *</label>
+          <select id="category" required>
+            <option value="Commercial">Commercial (Shops, Plazas, Offices)</option>
+            <option value="Domestic / Residential">Domestic / Residential (Houses, Flats, Plots)</option>
+            <option value="Industrial">Industrial (Factories, Warehouses, Land)</option>
+            <option value="Agricultural">Agricultural Land / Farm Houses</option>
+          </select>
         </div>
+      </div>
 
-        <h2>3. Location & Accessibility (Public)</h2>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Main Road Approach</label>
-                <input type="text" required placeholder="e.g., Main Boulevard, GT Road">
-            </div>
-            <div class="form-group">
-                <label>Link Road / Street Width</label>
-                <input type="text" placeholder="e.g., 40 Feet Street, 20 Feet Link Road">
-            </div>
+      <h2>2. Owner / Client Information (Hidden Behind Paywall + OTP)</h2>
+      <div class="grid">
+        <div>
+          <label>Full Name *</label>
+          <input type="text" id="fullName" required placeholder="Enter full name" />
         </div>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Approach Type</label>
-                <input type="text" placeholder="e.g., Corner Property, Frontage, Double Road">
-            </div>
-            <div class="form-group">
-                <label>Conveyance & Transport Availability</label>
-                <input type="text" placeholder="e.g., Easy Cargo access, Bus stop nearby, Metro approach">
-            </div>
+        <div>
+          <label>Contact Number (Hidden from Public) *</label>
+          <input type="tel" id="phone" required placeholder="e.g., +923001234567" />
         </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Exact Property Address (Hidden from Public) *</label>
+        <textarea id="exactAddress" rows="2" required placeholder="House/Plot #, Street, Block, Sector/Society..."></textarea>
+      </div>
 
-        <h2>4. Property Dimensions & Structure</h2>
-        <div class="grid-3">
-            <div class="form-group">
-                <label>Total Area Size</label>
-                <input type="text" required placeholder="e.g., 5 Marla, 1 Kanal, 200 Sq Yds">
-            </div>
-            <div class="form-group">
-                <label>Covered Area Size</label>
-                <input type="text" placeholder="e.g., 1800 Sq Ft, Fully Covered">
-            </div>
-            <div class="form-group">
-                <label>Total Floors</label>
-                <input type="number" min="0" placeholder="e.g., Basement + 2 Floors">
-            </div>
+      <h2>3. Location, Approach & Conveyance (Public)</h2>
+      <div class="grid">
+        <div>
+          <label>Main Road Approach *</label>
+          <input type="text" id="mainRoad" required placeholder="e.g., GT Road, Canal Road, Main Blvd" />
         </div>
-        <div class="grid-3">
-            <div class="form-group">
-                <label>Number of Rooms</label>
-                <input type="number" min="0" placeholder="0 if commercial open hall">
-            </div>
-            <div class="form-group">
-                <label>Number of Baths</label>
-                <input type="number" min="0" placeholder="Number of bathrooms">
-            </div>
-            <div class="form-group">
-                <label>Number of Kitchens</label>
-                <input type="number" min="0" placeholder="Number of kitchens">
-            </div>
+        <div>
+          <label>Link Road / Street Width *</label>
+          <input type="text" id="linkRoad" required placeholder="e.g., 40 Feet Street, 20 Feet Link Road" />
         </div>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Number of Commercial Shops (If any)</label>
-                <input type="number" min="0" placeholder="Number of built-in shops">
-            </div>
-            <div class="form-group">
-                <label>Property Condition</label>
-                <select required>
-                    <option value="fresh">Fresh Construction / Brand New / Newly Repaired</option>
-                    <option value="old">Old Construction / Needs Renovation</option>
-                </select>
-            </div>
+        <div>
+          <label>Approach Type *</label>
+          <input type="text" id="approach" required placeholder="e.g., Corner, Double Road, Frontage" />
         </div>
+        <div>
+          <label>Conveyance & Transport *</label>
+          <input type="text" id="conveyance" required placeholder="e.g., Bus stop, Metro, Cargo truck access" />
+        </div>
+      </div>
 
-        <h2>5. Utilities & Material Quality</h2>
-        <label>Available Utilities</label>
-        <div class="checkbox-group form-group">
-            <div class="checkbox-item"><input type="checkbox" id="util_elec"><label for="util_elec">Electricity Meter</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="util_solar"><label for="util_solar">Solar System Installed</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="util_gas"><label for="util_gas">Sui Gas</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="util_sew"><label for="util_sew">Sewerage System</label></div>
+      <h2>4. Dimensions, Rooms & Condition</h2>
+      <div class="grid">
+        <div>
+          <label>Total Area Size *</label>
+          <input type="text" id="totalArea" required placeholder="e.g., 5 Marla, 1 Kanal, 500 Sq Yds" />
         </div>
+        <div>
+          <label>Covered Area Size *</label>
+          <input type="text" id="coveredArea" required placeholder="e.g., 2,400 Sq Ft" />
+        </div>
+        <div>
+          <label>Total Floors *</label>
+          <input type="text" id="floors" required placeholder="e.g., Ground + 1 Floor" />
+        </div>
+        <div>
+          <label>Commercial Shops (If any)</label>
+          <input type="number" id="shops" value="0" min="0" />
+        </div>
+        <div>
+          <label>Rooms</label>
+          <input type="number" id="rooms" value="0" min="0" />
+        </div>
+        <div>
+          <label>Bathrooms</label>
+          <input type="number" id="baths" value="0" min="0" />
+        </div>
+        <div>
+          <label>Kitchens</label>
+          <input type="number" id="kitchens" value="0" min="0" />
+        </div>
+        <div>
+          <label>Property Condition *</label>
+          <select id="condition" required>
+            <option value="Fresh Construction / Brand New">Fresh Construction / Brand New</option>
+            <option value="Newly Repaired / Renovated">Newly Repaired / Renovated</option>
+            <option value="Old Construction / Needs Repair">Old Construction / Needs Repair</option>
+          </select>
+        </div>
+      </div>
 
-        <label>Material Qualities & Finishings</label>
-        <div class="checkbox-group form-group">
-            <div class="checkbox-item"><input type="checkbox" id="mat_tiles"><label for="mat_tiles">Premium Tiles Flooring</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="mat_stone"><label for="mat_stone">Marble / Stone Work</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="mat_plaster"><label for="mat_plaster">Complete Plaster Finish</label></div>
-        </div>
+      <h2>5. Utilities & Material Qualities</h2>
+      <label>Available Utilities:</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="util" value="Electricity Meter"> Electricity Meter</label>
+        <label><input type="checkbox" class="util" value="Solar System"> Solar System</label>
+        <label><input type="checkbox" class="util" value="Sui Gas"> Sui Gas</label>
+        <label><input type="checkbox" class="util" value="Sewerage"> Sewerage System</label>
+      </div>
 
-        <h2>6. Media Uploads & Google Map Tagging</h2>
-        <div class="grid-2">
-            <div class="form-group">
-                <label>Upload Property Pictures</label>
-                <input type="file" multiple accept="image/*">
-            </div>
-            <div class="form-group">
-                <label>Upload Video Clip Option</label>
-                <input type="file" accept="video/*">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Google Maps Location Pinned Coordinate Tag</label>
-            <input type="text" required placeholder="Paste Google Maps Link or Latitude, Longitude (e.g., 31.4504, 73.1350)">
-        </div>
+      <label style="margin-top:0.8rem;">Construction Qualities & Finishings:</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="qual" value="Tiles Flooring"> Tiles Flooring</label>
+        <label><input type="checkbox" class="qual" value="Stone / Marble"> Stone / Marble Work</label>
+        <label><input type="checkbox" class="qual" value="Complete Plaster"> Complete Plaster</label>
+      </div>
 
-        <h2>7. Pricing & Payment Schedule</h2>
-        <div class="grid-3">
-            <div class="form-group">
-                <label>Total Demand Range</label>
-                <input type="text" required placeholder="e.g., 1.5 Crore PKR / $55,000">
-            </div>
-            <div class="form-group">
-                <label>Installments Available?</label>
-                <select id="installments" required>
-                    <option value="no">No - Cash payment only</option>
-                    <option value="yes">Yes - Installment plan available</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Payment Time Frame Limit</label>
-                <input type="text" placeholder="e.g., 2 Years Plan, 6 Months Lump Sum">
-            </div>
+      <h2>6. Media Uploads (At Least 3 Pictures) & Google Map Screen</h2>
+      <div class="grid">
+        <div>
+          <label>Upload Property Pictures (Minimum 3 Required) *</label>
+          <input type="file" id="photos" accept="image/*" multiple required />
+          <small style="color:var(--muted);">Select at least 3 clear photos.</small>
         </div>
-
-        <div class="paywall-notice">
-            <h3>🔒 Global Contact Paywall Protection Enabled</h3>
-            <p>
-                By registering, you acknowledge that buyer and seller phone numbers and structural addresses remain hidden globally. 
-                To instantly clear security restrictions and unlock full client details, a verification payment of 
-                <strong>PKR 2,500 via JazzCash / EasyPaisa to 03006604229</strong> (or <strong>$25 USD via international transfer</strong> for global clients) is required. This website is Just for contact no exchange Deals are not Liable
-            </p>
+        <div>
+          <label>Upload Video Clip Option (Optional)</label>
+          <input type="file" id="videoClip" accept="video/*" />
         </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <label>Google Maps Pinned Link or Coordinates (Short Screen Map) *</label>
+        <input type="text" id="mapCoords" required placeholder="e.g., 31.4504, 73.1350 or https://maps.google.com/..." />
+      </div>
 
-        <button type="submit" class="btn">Register Property Globally</button>
+      <h2>7. Demand Range & Installment Plan</h2>
+      <div class="grid">
+        <div>
+          <label>Total Demand Range *</label>
+          <input type="text" id="demand" required placeholder="e.g., 1.85 Crore PKR / $65,000 USD" />
+        </div>
+        <div>
+          <label>Installments Available? *</label>
+          <select id="installments" required>
+            <option value="No - Full Cash">No - Full Cash Payment</option>
+            <option value="Yes - Installments Available">Yes - Installments Available</option>
+          </select>
+        </div>
+        <div>
+          <label>Payment Time Frame *</label>
+          <input type="text" id="timeFrame" required placeholder="e.g., 3 Months Cash / 2 Years Plan" />
+        </div>
+      </div>
+
+      <div class="paywall-box">
+        <strong>🔒 Global Direct-Contact Protection & Firebase OTP Verification:</strong><br/>
+        Your phone number and exact house/plot address remain hidden globally. Viewers must pay <strong>PKR 2,700 or $10 USD</strong> via <strong>JazzCash / EasyPaisa to 03006604229</strong> and verify via <strong>Firebase Phone OTP</strong> to unlock your direct contact details. <em>ACE PROPERTY is a direct contact directory; deals are strictly between buyer and seller with zero commission.</em>
+      </div>
+
+      <button type="submit" class="btn-submit">Publish Property Globally</button>
     </form>
+  </div>
 </div>
 
-<script>
-    function handleSubmit(event) {
-        event.preventDefault();
-        alert('Success! Your property listing has been registered on the global ACE PROPERTY database. Contact info is locked until your payment to 03006604229 / $25 is verified.');
-        
-        // Simple client-side counter increase simulation
-        const totalElem = document.getElementById('count-total');
-        let currentTotal = parseInt(totalElem.innerText.replace(/,/g, ''));
-        totalElem.innerText = (currentTotal + 1).toLocaleString();
-        
-        const cat = document.getElementById('category').value;
-        if(cat) {
-            const catElem = document.getElementById('count-' + cat);
-            if(catElem) {
-                let currentCat = parseInt(catElem.innerText);
-                catElem.innerText = currentCat + 1;
-            }
-        }
-        document.getElementById('propertyForm').reset();
+<!-- UNLOCK & FIREBASE OTP MODAL -->
+<div id="unlockModal" class="modal">
+  <div class="modal-content">
+    <h3 style="margin-top:0; color:var(--primary);">🔓 Unlock Direct Owner Contact</h3>
+    <p style="font-size:0.9rem;">
+      1. Send <strong>PKR 2,700</strong> (or <strong>$10 USD</strong>) via <strong>JazzCash / EasyPaisa</strong> to:<br/>
+      <span style="display:inline-block; background:#dcfce7; color:#166534; padding:0.3rem 0.6rem; border-radius:6px; font-weight:800; margin:0.4rem 0; font-size:1.05rem;">03006604229</span>
+    </p>
+    <label>2. Enter Payment Transaction ID (TID):</label>
+    <input type="text" id="tidInput" placeholder="e.g., 01928374655" style="margin-bottom:0.7rem;" />
+
+    <label>3. Your Mobile Number (for Firebase OTP):</label>
+    <div style="display:flex; gap:0.5rem; margin-bottom:0.7rem;">
+      <input type="tel" id="viewerPhone" placeholder="+92300XXXXXXX" />
+      <button type="button" onclick="sendFirebaseOTP()" style="background:var(--accent); color:#fff; border:none; border-radius:6px; padding:0 0.8rem; font-weight:600; cursor:pointer;">Send OTP</button>
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <div id="otpSection" style="display:none; margin-bottom:0.8rem;">
+      <label>4. Enter 6-Digit OTP Received via SMS:</label>
+      <input type="text" id="otpCode" placeholder="123456" />
+    </div>
+
+    <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+      <button type="button" onclick="verifyAndUnlock()" style="flex:1; background:var(--success); color:#fff; border:none; padding:0.7rem; border-radius:6px; font-weight:700; cursor:pointer;">Verify OTP & Unlock</button>
+      <button type="button" onclick="closeModal()" style="background:#e2e8f0; border:none; padding:0.7rem 1rem; border-radius:6px; cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>ACE PROPERTY</strong> — Global Direct Real Estate Platform (Zero Commission)<br/>
+  Verification Desk (JazzCash / EasyPaisa): 03006604229 | Website is for direct contact exchange only; deals are not liable.
+</footer>
+
+<!-- Firebase App & Auth SDKs (Free Spark Plan Integration) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  // PASTE YOUR FREE FIREBASE PROJECT CONFIG HERE:
+  const firebaseConfig = {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  let auth = null;
+  try {
+    if (firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY") {
+      const app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
     }
+  } catch (e) { console.warn("Firebase config pending."); }
+
+  window.firebaseAuthInstance = auth;
+  window.RecaptchaVerifier = RecaptchaVerifier;
+  window.signInWithPhoneNumber = signInWithPhoneNumber;
 </script>
 
+<script>
+  // Visitor Counter
+  let visitors = parseInt(localStorage.getItem('ace_visitors') || '1420', 10) + 1;
+  localStorage.setItem('ace_visitors', visitors);
+  document.getElementById('visitorCount').innerText = visitors.toLocaleString();
+
+  // Sample Initial Property + LocalStorage Persistence
+  let properties = JSON.parse(localStorage.getItem('ace_properties')) || [
+    {
+      id: 1,
+      role: "Seller / Landlord",
+      category: "Commercial",
+      fullName: "Muhammad Tariq (Verified Owner)",
+      phone: "+92 300-7654321",
+      exactAddress: "Plot 14-B, Main Commercial Boulevard, Phase 4, Faisalabad",
+      mainRoad: "Main Boulevard (100 Ft)",
+      linkRoad: "30 Ft Side Street",
+      approach: "Corner Plaza Frontage",
+      conveyance: "Main Bus & Cargo Route",
+      totalArea: "10 Marla",
+      coveredArea: "4,500 Sq Ft",
+      floors: "Basement + Ground + 2 Floors",
+      shops: 4, rooms: 6, baths: 4, kitchens: 2,
+      condition: "Fresh Construction / Brand New",
+      utilities: ["Electricity Meter", "Solar System", "Sewerage"],
+      qualities: ["Tiles Flooring", "Stone / Marble", "Complete Plaster"],
+      mapCoords: "31.4504, 73.1350",
+      demand: "4.5 Crore PKR / $160,000",
+      installments: "Yes - Installments Available",
+      timeFrame: "1 Year Easy Installments",
+      images: [
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400"
+      ],
+      unlocked: false
+    }
+  ];
+
+  let activeUnlockId = null;
+
+  function switchTab(tab) {
+    document.getElementById('tab-listings').style.display = tab === 'listings' ? 'block' : 'none';
+    document.getElementById('tab-register').style.display = tab === 'register' ? 'block' : 'none';
+    document.querySelectorAll('.tab-btn').forEach((b, i) => {
+      b.classList.toggle('active', (tab === 'listings' && i === 0) || (tab === 'register' && i === 1));
+    });
+  }
+
+  function renderProperties() {
+    const catFilter = document.getElementById('filterCategory').value;
+    const roleFilter = document.getElementById('filterRole').value;
+    const feed = document.getElementById('propertyFeed');
+    feed.innerHTML = '';
+
+    const filtered = properties.filter(p =>
+      (catFilter === 'ALL' || p.category === catFilter) &&
+      (roleFilter === 'ALL' || p.role === roleFilter)
+    );
+
+    document.getElementById('propTotal').innerText = filtered.length;
+
+    filtered.forEach(p => {
+      const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(p.mapCoords)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+      const imgsHtml = p.images.map(src => `<img src="${src}" alt="Property photo" />`).join('');
+
+      feed.innerHTML += `
+        <div class="prop-card">
+          <div class="prop-header">
+            <div>
+              <span class="prop-tag">${p.role}</span>
+              <span class="prop-tag" style="background:#fef3c7; color:#92400e;">${p.category}</span>
+              <span class="prop-tag" style="background:#dcfce7; color:#166534;">${p.condition}</span>
+            </div>
+            <div class="prop-price">${p.demand}</div>
+          </div>
+
+          <div class="prop-specs">
+            <span>📐 Area: <strong>${p.totalArea}</strong> (Covered: ${p.coveredArea})</span>
+            <span>🏢 Floors: <strong>${p.floors}</strong></span>
+            <span>🛣️ Main Road: <strong>${p.mainRoad}</strong> | Link: ${p.linkRoad}</span>
+            <span>🧭 Approach: <strong>${p.approach}</strong></span>
+            <span>🚌 Conveyance: <strong>${p.conveyance}</strong></span>
+            <span>🛏️ Rooms: ${p.rooms} | 🚿 Baths: ${p.baths} | 🍳 Kitchens: ${p.kitchens} | 🏪 Shops: ${p.shops}</span>
+            <span>⚡ Utilities: ${p.utilities.join(', ') || 'Standard'}</span>
+            <span>🧱 Qualities: ${p.qualities.join(', ') || 'Standard'}</span>
+            <span>💳 Payment: <strong>${p.installments}</strong> (${p.timeFrame})</span>
+          </div>
+
+          <div class="media-preview">${imgsHtml}</div>
+
+          <!-- Embedded Google Map Short Screen -->
+          <div style="margin:0.8rem 0; border-radius:8px; overflow:hidden; border:1px solid #cbd5e1;">
+            <iframe width="100%" height="160" frameborder="0" src="${mapEmbedUrl}"></iframe>
+          </div>
+
+          <div class="locked-box">
+            <div>
+              <strong>Owner / Client:</strong> ${p.unlocked ? p.fullName : '<span class="blur-text">Hidden Name</span>'}<br/>
+              <strong>Direct Phone:</strong> ${p.unlocked ? `<a href="tel:${p.phone}">${p.phone}</a>` : '<span class="blur-text">+92 300-XXXXXXX</span>'}<br/>
+              <strong>Exact Address:</strong> ${p.unlocked ? p.exactAddress : '<span class="blur-text">Hidden Street & House Number</span>'}
+            </div>
+            ${p.unlocked
+              ? `<span style="color:var(--success); font-weight:800;">✅ Unlocked via OTP</span>`
+              : `<button class="btn-unlock" onclick="openUnlockModal(${p.id})">🔒 Pay PKR 2,700 / $10 & Verify OTP to Unlock</button>`
+            }
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  async function submitProperty(e) {
+    e.preventDefault();
+    const files = document.getElementById('photos').files;
+    if (files.length < 3) {
+      alert("⚠️ Please upload at least 3 property pictures before publishing.");
+      return;
+    }
+
+    const imagePromises = Array.from(files).slice(0, 5).map(file => new Promise(res => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result);
+      reader.readAsDataURL(file);
+    }));
+    const uploadedImages = await Promise.all(imagePromises);
+
+    const utilities = Array.from(document.querySelectorAll('.util:checked')).map(c => c.value);
+    const qualities = Array.from(document.querySelectorAll('.qual:checked')).map(c => c.value);
+
+    const newProp = {
+      id: Date.now(),
+      role: document.getElementById('role').value,
+      category: document.getElementById('category').value,
+      fullName: document.getElementById('fullName').value,
+      phone: document.getElementById('phone').value,
+      exactAddress: document.getElementById('exactAddress').value,
+      mainRoad: document.getElementById('mainRoad').value,
+      linkRoad: document.getElementById('linkRoad').value,
+      approach: document.getElementById('approach').value,
+      conveyance: document.getElementById('conveyance').value,
+      totalArea: document.getElementById('totalArea').value,
+      coveredArea: document.getElementById('coveredArea').value,
+      floors: document.getElementById('floors').value,
+      shops: document.getElementById('shops').value,
+      rooms: document.getElementById('rooms').value,
+      baths: document.getElementById('baths').value,
+      kitchens: document.getElementById('kitchens').value,
+      condition: document.getElementById('condition').value,
+      utilities,
+      qualities,
+      mapCoords: document.getElementById('mapCoords').value,
+      demand: document.getElementById('demand').value,
+      installments: document.getElementById('installments').value,
+      timeFrame: document.getElementById('timeFrame').value,
+      images: uploadedImages,
+      unlocked: false
+    };
+
+    properties.unshift(newProp);
+    localStorage.setItem('ace_properties', JSON.stringify(properties));
+    e.target.reset();
+    switchTab('listings');
+    renderProperties();
+    alert("✅ Your listing is now live on ACE PROPERTY with hidden contact protection!");
+  }
+
+  function openUnlockModal(id) {
+    activeUnlockId = id;
+    document.getElementById('unlockModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('unlockModal').style.display = 'none';
+  }
+
+  function sendFirebaseOTP() {
+    const phone = document.getElementById('viewerPhone').value.trim();
+    const tid = document.getElementById('tidInput').value.trim();
+    if (!tid || !phone) {
+      alert("Please enter your JazzCash/EasyPaisa Transaction ID and mobile number.");
+      return;
+    }
+
+    if (window.firebaseAuthInstance) {
+      window.recaptchaVerifier = new window.RecaptchaVerifier(window.firebaseAuthInstance, 'recaptcha-container', { size: 'invisible' });
+      window.signInWithPhoneNumber(window.firebaseAuthInstance, phone, window.recaptchaVerifier)
+        .then(confirmationResult => {
+          window.confirmationResult = confirmationResult;
+          document.getElementById('otpSection').style.display = 'block';
+          alert("📲 Firebase OTP sent to " + phone);
+        })
+        .catch(err => alert("Firebase OTP Error: " + err.message));
+    } else {
+      // Fallback demo mode until Firebase API keys are pasted
+      document.getElementById('otpSection').style.display = 'block';
+      alert("📲 OTP Sent! (Paste your Firebase Config keys in the script to enable live SMS delivery. Demo OTP: 123456)");
+    }
+  }
+
+  function verifyAndUnlock() {
+    const code = document.getElementById('otpCode').value.trim();
+    if (!code) { alert("Enter the 6-digit OTP code."); return; }
+
+    const completeUnlock = () => {
+      const prop = properties.find(p => p.id === activeUnlockId);
+      if (prop) prop.unlocked = true;
+      localStorage.setItem('ace_properties', JSON.stringify(properties));
+      renderProperties();
+      closeModal();
+      alert("✅ OTP Verified! Owner contact number and exact address are now unlocked.");
+    };
+
+    if (window.confirmationResult) {
+      window.confirmationResult.confirm(code)
+        .then(() => completeUnlock())
+        .catch(() => alert("❌ Invalid OTP code. Please try again."));
+    } else if (code === "123456") {
+      completeUnlock();
+    } else {
+      alert("❌ Invalid OTP code.");
+    }
+  }
+
+  renderProperties();
+</script>
 </body>
 </html>
