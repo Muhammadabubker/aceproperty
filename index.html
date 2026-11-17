@@ -3,608 +3,375 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f172a" />
-  <title>ACE PROPERTY - Direct Owners Contact | No Commission</title>
+  <title>ACE PROPERTY | Premier Real Estate</title>
+  <script src="https://tailwindcss.com"></script>
   <style>
-    :root {
-      --primary: #0f172a;
-      --accent: #2563eb;
-      --success: #16a34a;
-      --warning: #d97706;
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #cbd5e1;
-    }
-    * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
-    header {
-      background: var(--primary); color: #fff; padding: 1.5rem 1rem; text-align: center;
-      border-bottom: 4px solid var(--accent);
-    }
-    header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-    header p { margin: 0.3rem 0 0; color: #94a3b8; font-size: 0.95rem; }
-    .badge-bar {
-      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem;
-    }
-    .badge {
-      background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem;
-    }
-    .container { max-width: 1000px; margin: 1.5rem auto; padding: 0 1rem; }
-    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .tab-btn {
-      flex: 1; padding: 0.9rem; border: none; border-radius: 8px; font-weight: 700;
-      cursor: pointer; background: #e2e8f0; color: var(--text); font-size: 1rem;
-    }
-    .tab-btn.active { background: var(--accent); color: #fff; }
-    .card {
-      background: var(--card); border-radius: 12px; padding: 1.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
-    }
-    h2 {
-      border-left: 4px solid var(--accent); padding-left: 0.75rem;
-      font-size: 1.2rem; color: var(--primary); margin-top: 1.5rem;
-    }
-    h2:first-child { margin-top: 0; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-    label { display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 0.3rem; }
-    input, select, textarea {
-      width: 100%; padding: 0.65rem; border: 1px solid var(--border);
-      border-radius: 6px; font-size: 0.95rem;
-    }
-    .checkbox-group {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.6rem; margin-top: 0.4rem;
-    }
-    .checkbox-group label {
-      display: flex; align-items: center; gap: 0.5rem; font-weight: 500;
-      background: #f8fafc; padding: 0.5rem; border-radius: 6px; border: 1px solid #e2e8f0; cursor: pointer;
-    }
-    .checkbox-group input { width: auto; }
-    .paywall-box {
-      background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;
-    }
-    .btn-submit {
-      width: 100%; padding: 1rem; background: var(--success); color: #fff; border: none;
-      border-radius: 8px; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-top: 1rem;
-    }
-    .btn-submit:hover { background: #15803d; }
-
-    /* Property Cards */
-    .prop-card {
-      border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; background: #fff;
-    }
-    .prop-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-    .prop-tag { background: #dbeafe; color: #1e40af; padding: 0.25rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; }
-    .prop-price { font-size: 1.25rem; font-weight: 800; color: var(--success); }
-    .prop-specs {
-      display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.8rem 0; font-size: 0.85rem; color: var(--muted);
-    }
-    .prop-specs span { background: #f1f5f9; padding: 0.25rem 0.6rem; border-radius: 4px; }
-    .media-preview { display: flex; gap: 0.5rem; overflow-x: auto; margin: 0.8rem 0; }
-    .media-preview img { height: 90px; width: 120px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1; }
-    .locked-box {
-      background: #f8fafc; border: 1px dashed #94a3b8; padding: 0.9rem; border-radius: 8px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;
-    }
-    .blur-text { filter: blur(5px); user-select: none; font-weight: 700; }
-    .btn-unlock {
-      background: var(--warning); color: #fff; border: none; padding: 0.6rem 1rem;
-      border-radius: 6px; font-weight: 700; cursor: pointer;
-    }
-
-    /* Modal */
-    .modal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65);
-      align-items: center; justify-content: center; padding: 1rem; z-index: 1000;
-    }
-    .modal-content {
-      background: #fff; max-width: 440px; width: 100%; border-radius: 12px; padding: 1.5rem;
-    }
-    footer {
-      text-align: center; padding: 1.5rem; background: var(--primary); color: #94a3b8; font-size: 0.85rem;
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
     }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-<header>
-  <h1>ACE PROPERTY</h1>
-  <p>Global Direct-Owner Real Estate Network — 0% Commission</p>
-  <div class="badge-bar">
-    <span class="badge">🌍 Global Listings</span>
-    <span class="badge">📍 Google Maps Tagged</span>
-    <span class="badge">👁️ Live Visitors: <strong id="visitorCount">1,420</strong></span>
-  </div>
-</header>
+  <!-- Navigation Header -->
+  <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-2">
+        <div class="w-9 h-9 bg-amber-500 rounded-lg flex items-center justify-center font-bold text-slate-900 text-xl">
+          A
+        </div>
+        <span class="text-2xl font-extrabold tracking-wider">ACE <span class="text-amber-400">PROPERTY</span></span>
+      </div>
 
-<div class="container">
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('listings')">🏢 Browse Listed Properties (<span id="propTotal">1</span>)</button>
-    <button class="tab-btn" onclick="switchTab('register')">➕ Register Property / Buyer Request</button>
-  </div>
-
-  <!-- TAB 1: LIVE PROPERTY LISTINGS -->
-  <div id="tab-listings">
-    <div class="card" style="padding: 1rem;">
-      <div class="grid">
-        <select id="filterCategory" onchange="renderProperties()">
-          <option value="ALL">All Categories</option>
-          <option value="Commercial">Commercial (Shops, Plazas, Offices)</option>
-          <option value="Domestic / Residential">Domestic / Residential (Houses, Flats, Plots)</option>
-          <option value="Industrial">Industrial (Factories, Warehouses, Land)</option>
-          <option value="Agricultural">Agricultural Land / Farm Houses</option>
-        </select>
-        <select id="filterRole" onchange="renderProperties()">
-          <option value="ALL">All Roles (Sellers & Buyers)</option>
-          <option value="Seller / Landlord">Direct Sellers / Landlords</option>
-          <option value="Buyer / Investor">Direct Buyers / Investors</option>
-        </select>
+      <!-- Live Visitor Counter Badge -->
+      <div class="flex items-center space-x-2 bg-slate-800 border border-slate-700 px-4 py-1.5 rounded-full text-sm">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-slate-300">Total Site Visits:</span>
+        <span id="visitor-count" class="font-bold text-amber-400">Loading...</span>
       </div>
     </div>
+  </header>
 
-    <div id="propertyFeed"></div>
-  </div>
-
-  <!-- TAB 2: REGISTRATION FORM -->
-  <div id="tab-register" style="display:none;">
-    <form id="aceForm" class="card" onsubmit="submitProperty(event)">
-      <h2>1. User Type & Category</h2>
-      <div class="grid">
-        <div>
-          <label>I am a: *</label>
-          <select id="role" required>
-            <option value="Seller / Landlord">Seller / Landlord (Direct Owner)</option>
-            <option value="Buyer / Investor">Buyer / Investor</option>
-          </select>
-        </div>
-        <div>
-          <label>Property Category *</label>
-          <select id="category" required>
-            <option value="Commercial">Commercial (Shops, Plazas, Offices)</option>
-            <option value="Domestic / Residential">Domestic / Residential (Houses, Flats, Plots)</option>
-            <option value="Industrial">Industrial (Factories, Warehouses, Land)</option>
-            <option value="Agricultural">Agricultural Land / Farm Houses</option>
-          </select>
-        </div>
-      </div>
-
-      <h2>2. Owner / Client Information (Hidden Behind Paywall + OTP)</h2>
-      <div class="grid">
-        <div>
-          <label>Full Name *</label>
-          <input type="text" id="fullName" required placeholder="Enter full name" />
-        </div>
-        <div>
-          <label>Contact Number (Hidden from Public) *</label>
-          <input type="tel" id="phone" required placeholder="e.g., +923001234567" />
-        </div>
-      </div>
-      <div style="margin-top:0.8rem;">
-        <label>Exact Property Address (Hidden from Public) *</label>
-        <textarea id="exactAddress" rows="2" required placeholder="House/Plot #, Street, Block, Sector/Society..."></textarea>
-      </div>
-
-      <h2>3. Location, Approach & Conveyance (Public)</h2>
-      <div class="grid">
-        <div>
-          <label>Main Road Approach *</label>
-          <input type="text" id="mainRoad" required placeholder="e.g., GT Road, Canal Road, Main Blvd" />
-        </div>
-        <div>
-          <label>Link Road / Street Width *</label>
-          <input type="text" id="linkRoad" required placeholder="e.g., 40 Feet Street, 20 Feet Link Road" />
-        </div>
-        <div>
-          <label>Approach Type *</label>
-          <input type="text" id="approach" required placeholder="e.g., Corner, Double Road, Frontage" />
-        </div>
-        <div>
-          <label>Conveyance & Transport *</label>
-          <input type="text" id="conveyance" required placeholder="e.g., Bus stop, Metro, Cargo truck access" />
-        </div>
-      </div>
-
-      <h2>4. Dimensions, Rooms & Condition</h2>
-      <div class="grid">
-        <div>
-          <label>Total Area Size *</label>
-          <input type="text" id="totalArea" required placeholder="e.g., 5 Marla, 1 Kanal, 500 Sq Yds" />
-        </div>
-        <div>
-          <label>Covered Area Size *</label>
-          <input type="text" id="coveredArea" required placeholder="e.g., 2,400 Sq Ft" />
-        </div>
-        <div>
-          <label>Total Floors *</label>
-          <input type="text" id="floors" required placeholder="e.g., Ground + 1 Floor" />
-        </div>
-        <div>
-          <label>Commercial Shops (If any)</label>
-          <input type="number" id="shops" value="0" min="0" />
-        </div>
-        <div>
-          <label>Rooms</label>
-          <input type="number" id="rooms" value="0" min="0" />
-        </div>
-        <div>
-          <label>Bathrooms</label>
-          <input type="number" id="baths" value="0" min="0" />
-        </div>
-        <div>
-          <label>Kitchens</label>
-          <input type="number" id="kitchens" value="0" min="0" />
-        </div>
-        <div>
-          <label>Property Condition *</label>
-          <select id="condition" required>
-            <option value="Fresh Construction / Brand New">Fresh Construction / Brand New</option>
-            <option value="Newly Repaired / Renovated">Newly Repaired / Renovated</option>
-            <option value="Old Construction / Needs Repair">Old Construction / Needs Repair</option>
-          </select>
-        </div>
-      </div>
-
-      <h2>5. Utilities & Material Qualities</h2>
-      <label>Available Utilities:</label>
-      <div class="checkbox-group">
-        <label><input type="checkbox" class="util" value="Electricity Meter"> Electricity Meter</label>
-        <label><input type="checkbox" class="util" value="Solar System"> Solar System</label>
-        <label><input type="checkbox" class="util" value="Sui Gas"> Sui Gas</label>
-        <label><input type="checkbox" class="util" value="Sewerage"> Sewerage System</label>
-      </div>
-
-      <label style="margin-top:0.8rem;">Construction Qualities & Finishings:</label>
-      <div class="checkbox-group">
-        <label><input type="checkbox" class="qual" value="Tiles Flooring"> Tiles Flooring</label>
-        <label><input type="checkbox" class="qual" value="Stone / Marble"> Stone / Marble Work</label>
-        <label><input type="checkbox" class="qual" value="Complete Plaster"> Complete Plaster</label>
-      </div>
-
-      <h2>6. Media Uploads (At Least 3 Pictures) & Google Map Screen</h2>
-      <div class="grid">
-        <div>
-          <label>Upload Property Pictures (Minimum 3 Required) *</label>
-          <input type="file" id="photos" accept="image/*" multiple required />
-          <small style="color:var(--muted);">Select at least 3 clear photos.</small>
-        </div>
-        <div>
-          <label>Upload Video Clip Option (Optional)</label>
-          <input type="file" id="videoClip" accept="video/*" />
-        </div>
-      </div>
-      <div style="margin-top:0.8rem;">
-        <label>Google Maps Pinned Link or Coordinates (Short Screen Map) *</label>
-        <input type="text" id="mapCoords" required placeholder="e.g., 31.4504, 73.1350 or https://maps.google.com/..." />
-      </div>
-
-      <h2>7. Demand Range & Installment Plan</h2>
-      <div class="grid">
-        <div>
-          <label>Total Demand Range *</label>
-          <input type="text" id="demand" required placeholder="e.g., 1.85 Crore PKR / $65,000 USD" />
-        </div>
-        <div>
-          <label>Installments Available? *</label>
-          <select id="installments" required>
-            <option value="No - Full Cash">No - Full Cash Payment</option>
-            <option value="Yes - Installments Available">Yes - Installments Available</option>
-          </select>
-        </div>
-        <div>
-          <label>Payment Time Frame *</label>
-          <input type="text" id="timeFrame" required placeholder="e.g., 3 Months Cash / 2 Years Plan" />
-        </div>
-      </div>
-
-      <div class="paywall-box">
-        <strong>🔒 Global Direct-Contact Protection & Firebase OTP Verification:</strong><br/>
-        Your phone number and exact house/plot address remain hidden globally. Viewers must pay <strong>PKR 2,700 or $10 USD</strong> via <strong>JazzCash / EasyPaisa to 03006604229</strong> and verify via <strong>Firebase Phone OTP</strong> to unlock your direct contact details. <em>ACE PROPERTY is a direct contact directory; deals are strictly between buyer and seller with zero commission.</em>
-      </div>
-
-      <button type="submit" class="btn-submit">Publish Property Globally</button>
-    </form>
-  </div>
-</div>
-
-<!-- UNLOCK & FIREBASE OTP MODAL -->
-<div id="unlockModal" class="modal">
-  <div class="modal-content">
-    <h3 style="margin-top:0; color:var(--primary);">🔓 Unlock Direct Owner Contact</h3>
-    <p style="font-size:0.9rem;">
-      1. Send <strong>PKR 2,700</strong> (or <strong>$10 USD</strong>) via <strong>JazzCash / EasyPaisa</strong> to:<br/>
-      <span style="display:inline-block; background:#dcfce7; color:#166534; padding:0.3rem 0.6rem; border-radius:6px; font-weight:800; margin:0.4rem 0; font-size:1.05rem;">03006604229</span>
-    </p>
-    <label>2. Enter Payment Transaction ID (TID):</label>
-    <input type="text" id="tidInput" placeholder="e.g., 01928374655" style="margin-bottom:0.7rem;" />
-
-    <label>3. Your Mobile Number (for Firebase OTP):</label>
-    <div style="display:flex; gap:0.5rem; margin-bottom:0.7rem;">
-      <input type="tel" id="viewerPhone" placeholder="+92300XXXXXXX" />
-      <button type="button" onclick="sendFirebaseOTP()" style="background:var(--accent); color:#fff; border:none; border-radius:6px; padding:0 0.8rem; font-weight:600; cursor:pointer;">Send OTP</button>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Find Your Dream Space with <span class="text-amber-400">ACE PROPERTY</span>
+      </h1>
+      <p class="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
+        Explore verified residential and commercial listings or publish your own property with high-resolution gallery previews.
+      </p>
+      <a href="#list-property" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-8 py-3 rounded-lg shadow-lg transition">
+        + List a Property
+      </a>
     </div>
+  </section>
 
-    <div id="recaptcha-container"></div>
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 
-    <div id="otpSection" style="display:none; margin-bottom:0.8rem;">
-      <label>4. Enter 6-Digit OTP Received via SMS:</label>
-      <input type="text" id="otpCode" placeholder="123456" />
-    </div>
+    <!-- Featured Listings Gallery -->
+    <section>
+      <div class="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900">Featured Listings</h2>
+          <p class="text-slate-500 mt-1">Real-time updates powered by Firebase Firestore</p>
+        </div>
+      </div>
 
-    <div style="display:flex; gap:0.5rem; margin-top:1rem;">
-      <button type="button" onclick="verifyAndUnlock()" style="flex:1; background:var(--success); color:#fff; border:none; padding:0.7rem; border-radius:6px; font-weight:700; cursor:pointer;">Verify OTP & Unlock</button>
-      <button type="button" onclick="closeModal()" style="background:#e2e8f0; border:none; padding:0.7rem 1rem; border-radius:6px; cursor:pointer;">Cancel</button>
-    </div>
-  </div>
-</div>
+      <!-- Listings Grid -->
+      <div id="listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="col-span-full text-center py-12 text-slate-500" id="loading-listings">
+          Connecting to ACE PROPERTY database...
+        </div>
+      </div>
+    </section>
 
-<footer>
-  <strong>ACE PROPERTY</strong> — Global Direct Real Estate Platform (Zero Commission)<br/>
-  Verification Desk (JazzCash / EasyPaisa): 03006604229 | Website is for direct contact exchange only; deals are not liable.
-</footer>
+    <!-- Submit Property Form (With 3-Picture Upload) -->
+    <section id="list-property" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 max-w-3xl mx-auto">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-slate-900">List Your Property</h2>
+        <p class="text-slate-500 text-sm mt-1">Fill out the details below and upload up to 3 property photos.</p>
+      </div>
 
-<!-- Firebase App & Auth SDKs (Free Spark Plan Integration) -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-  // PASTE YOUR FREE FIREBASE PROJECT CONFIG HERE:
-  const firebaseConfig = {
-    apiKey: "YOUR_FIREBASE_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-
-  let auth = null;
-  try {
-    if (firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY") {
-      const app = initializeApp(firebaseConfig);
-      auth = getAuth(app);
-    }
-  } catch (e) { console.warn("Firebase config pending."); }
-
-  window.firebaseAuthInstance = auth;
-  window.RecaptchaVerifier = RecaptchaVerifier;
-  window.signInWithPhoneNumber = signInWithPhoneNumber;
-</script>
-
-<script>
-  // Visitor Counter
-  let visitors = parseInt(localStorage.getItem('ace_visitors') || '1420', 10) + 1;
-  localStorage.setItem('ace_visitors', visitors);
-  document.getElementById('visitorCount').innerText = visitors.toLocaleString();
-
-  // Sample Initial Property + LocalStorage Persistence
-  let properties = JSON.parse(localStorage.getItem('ace_properties')) || [
-    {
-      id: 1,
-      role: "Seller / Landlord",
-      category: "Commercial",
-      fullName: "Muhammad Tariq (Verified Owner)",
-      phone: "+92 300-7654321",
-      exactAddress: "Plot 14-B, Main Commercial Boulevard, Phase 4, Faisalabad",
-      mainRoad: "Main Boulevard (100 Ft)",
-      linkRoad: "30 Ft Side Street",
-      approach: "Corner Plaza Frontage",
-      conveyance: "Main Bus & Cargo Route",
-      totalArea: "10 Marla",
-      coveredArea: "4,500 Sq Ft",
-      floors: "Basement + Ground + 2 Floors",
-      shops: 4, rooms: 6, baths: 4, kitchens: 2,
-      condition: "Fresh Construction / Brand New",
-      utilities: ["Electricity Meter", "Solar System", "Sewerage"],
-      qualities: ["Tiles Flooring", "Stone / Marble", "Complete Plaster"],
-      mapCoords: "31.4504, 73.1350",
-      demand: "4.5 Crore PKR / $160,000",
-      installments: "Yes - Installments Available",
-      timeFrame: "1 Year Easy Installments",
-      images: [
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400",
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400",
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400"
-      ],
-      unlocked: false
-    }
-  ];
-
-  let activeUnlockId = null;
-
-  function switchTab(tab) {
-    document.getElementById('tab-listings').style.display = tab === 'listings' ? 'block' : 'none';
-    document.getElementById('tab-register').style.display = tab === 'register' ? 'block' : 'none';
-    document.querySelectorAll('.tab-btn').forEach((b, i) => {
-      b.classList.toggle('active', (tab === 'listings' && i === 0) || (tab === 'register' && i === 1));
-    });
-  }
-
-  function renderProperties() {
-    const catFilter = document.getElementById('filterCategory').value;
-    const roleFilter = document.getElementById('filterRole').value;
-    const feed = document.getElementById('propertyFeed');
-    feed.innerHTML = '';
-
-    const filtered = properties.filter(p =>
-      (catFilter === 'ALL' || p.category === catFilter) &&
-      (roleFilter === 'ALL' || p.role === roleFilter)
-    );
-
-    document.getElementById('propTotal').innerText = filtered.length;
-
-    filtered.forEach(p => {
-      const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(p.mapCoords)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
-      const imgsHtml = p.images.map(src => `<img src="${src}" alt="Property photo" />`).join('');
-
-      feed.innerHTML += `
-        <div class="prop-card">
-          <div class="prop-header">
-            <div>
-              <span class="prop-tag">${p.role}</span>
-              <span class="prop-tag" style="background:#fef3c7; color:#92400e;">${p.category}</span>
-              <span class="prop-tag" style="background:#dcfce7; color:#166534;">${p.condition}</span>
-            </div>
-            <div class="prop-price">${p.demand}</div>
+      <form id="property-form" class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Property Title *</label>
+            <input type="text" id="prop-title" required placeholder="e.g., Modern 5 Marla Villa"
+              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
           </div>
 
-          <div class="prop-specs">
-            <span>📐 Area: <strong>${p.totalArea}</strong> (Covered: ${p.coveredArea})</span>
-            <span>🏢 Floors: <strong>${p.floors}</strong></span>
-            <span>🛣️ Main Road: <strong>${p.mainRoad}</strong> | Link: ${p.linkRoad}</span>
-            <span>🧭 Approach: <strong>${p.approach}</strong></span>
-            <span>🚌 Conveyance: <strong>${p.conveyance}</strong></span>
-            <span>🛏️ Rooms: ${p.rooms} | 🚿 Baths: ${p.baths} | 🍳 Kitchens: ${p.kitchens} | 🏪 Shops: ${p.shops}</span>
-            <span>⚡ Utilities: ${p.utilities.join(', ') || 'Standard'}</span>
-            <span>🧱 Qualities: ${p.qualities.join(', ') || 'Standard'}</span>
-            <span>💳 Payment: <strong>${p.installments}</strong> (${p.timeFrame})</span>
-          </div>
-
-          <div class="media-preview">${imgsHtml}</div>
-
-          <!-- Embedded Google Map Short Screen -->
-          <div style="margin:0.8rem 0; border-radius:8px; overflow:hidden; border:1px solid #cbd5e1;">
-            <iframe width="100%" height="160" frameborder="0" src="${mapEmbedUrl}"></iframe>
-          </div>
-
-          <div class="locked-box">
-            <div>
-              <strong>Owner / Client:</strong> ${p.unlocked ? p.fullName : '<span class="blur-text">Hidden Name</span>'}<br/>
-              <strong>Direct Phone:</strong> ${p.unlocked ? `<a href="tel:${p.phone}">${p.phone}</a>` : '<span class="blur-text">+92 300-XXXXXXX</span>'}<br/>
-              <strong>Exact Address:</strong> ${p.unlocked ? p.exactAddress : '<span class="blur-text">Hidden Street & House Number</span>'}
-            </div>
-            ${p.unlocked
-              ? `<span style="color:var(--success); font-weight:800;">✅ Unlocked via OTP</span>`
-              : `<button class="btn-unlock" onclick="openUnlockModal(${p.id})">🔒 Pay PKR 2,700 / $10 & Verify OTP to Unlock</button>`
-            }
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Price (PKR / USD) *</label>
+            <input type="text" id="prop-price" required placeholder="e.g., PKR 2.5 Crore"
+              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
           </div>
         </div>
-      `;
-    });
-  }
 
-  async function submitProperty(e) {
-    e.preventDefault();
-    const files = document.getElementById('photos').files;
-    if (files.length < 3) {
-      alert("⚠️ Please upload at least 3 property pictures before publishing.");
-      return;
-    }
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Location *</label>
+            <input type="text" id="prop-location" required placeholder="e.g., Canal Road, Faisalabad"
+              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+          </div>
 
-    const imagePromises = Array.from(files).slice(0, 5).map(file => new Promise(res => {
-      const reader = new FileReader();
-      reader.onload = () => res(reader.result);
-      reader.readAsDataURL(file);
-    }));
-    const uploadedImages = await Promise.all(imagePromises);
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Contact Phone *</label>
+            <input type="tel" id="prop-phone" required placeholder="e.g., +92 300 1234567"
+              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+          </div>
+        </div>
 
-    const utilities = Array.from(document.querySelectorAll('.util:checked')).map(c => c.value);
-    const qualities = Array.from(document.querySelectorAll('.qual:checked')).map(c => c.value);
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1">Description *</label>
+          <textarea id="prop-desc" rows="3" required placeholder="Bedrooms, bathrooms, nearby landmarks, etc."
+            class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+        </div>
 
-    const newProp = {
-      id: Date.now(),
-      role: document.getElementById('role').value,
-      category: document.getElementById('category').value,
-      fullName: document.getElementById('fullName').value,
-      phone: document.getElementById('phone').value,
-      exactAddress: document.getElementById('exactAddress').value,
-      mainRoad: document.getElementById('mainRoad').value,
-      linkRoad: document.getElementById('linkRoad').value,
-      approach: document.getElementById('approach').value,
-      conveyance: document.getElementById('conveyance').value,
-      totalArea: document.getElementById('totalArea').value,
-      coveredArea: document.getElementById('coveredArea').value,
-      floors: document.getElementById('floors').value,
-      shops: document.getElementById('shops').value,
-      rooms: document.getElementById('rooms').value,
-      baths: document.getElementById('baths').value,
-      kitchens: document.getElementById('kitchens').value,
-      condition: document.getElementById('condition').value,
-      utilities,
-      qualities,
-      mapCoords: document.getElementById('mapCoords').value,
-      demand: document.getElementById('demand').value,
-      installments: document.getElementById('installments').value,
-      timeFrame: document.getElementById('timeFrame').value,
-      images: uploadedImages,
-      unlocked: false
+        <!-- 3 Picture Upload Section -->
+        <div class="bg-slate-50 p-5 rounded-xl border border-dashed border-slate-300">
+          <div class="flex justify-between items-center mb-3">
+            <label class="block text-sm font-semibold text-slate-700">
+              Upload Property Photos (Max 3 Images) *
+            </label>
+            <span id="photo-count-label" class="text-xs font-medium text-slate-500">0 / 3 selected</span>
+          </div>
+
+          <input type="file" id="prop-images" accept="image/*" multiple required
+            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-700 cursor-pointer" />
+          
+          <p class="text-xs text-slate-400 mt-2">Supported formats: JPG, PNG, WEBP. Select up to 3 files at once.</p>
+
+          <!-- Image Preview Grid -->
+          <div id="image-preview-container" class="grid grid-cols-3 gap-4 mt-4 hidden"></div>
+        </div>
+
+        <!-- Status & Submit Button -->
+        <div id="upload-status" class="hidden text-sm font-medium p-3 rounded-lg"></div>
+
+        <button type="submit" id="submit-btn"
+          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-lg shadow transition flex justify-center items-center">
+          Publish Property Listing
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm mt-16">
+    <p>&copy; <span id="year"></span> ACE PROPERTY. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Firebase Modular SDK (v11) -->
+  <script type="module">
+    import { initializeApp } from "https://gstatic.com";
+    import { 
+      getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, query, orderBy, serverTimestamp 
+    } from "https://gstatic.com";
+    import { 
+      getStorage, ref, uploadBytes, getDownloadURL 
+    } from "https://gstatic.com";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // =========================================================================
+    // 1. REPLACE WITH YOUR ACTUAL FIREBASE PROJECT CONFIGURATION
+    // =========================================================================
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_://firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
     };
 
-    properties.unshift(newProp);
-    localStorage.setItem('ace_properties', JSON.stringify(properties));
-    e.target.reset();
-    switchTab('listings');
-    renderProperties();
-    alert("✅ Your listing is now live on ACE PROPERTY with hidden contact protection!");
-  }
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-  function openUnlockModal(id) {
-    activeUnlockId = id;
-    document.getElementById('unlockModal').style.display = 'flex';
-  }
+    // =========================================================================
+    // 2. LIVE VISITOR COUNTER (FIRESTORE ATOMIC INCREMENT)
+    // =========================================================================
+    async function initVisitorCounter() {
+      const counterEl = document.getElementById("visitor-count");
+      const statsRef = doc(db, "siteStats", "visitors");
 
-  function closeModal() {
-    document.getElementById('unlockModal').style.display = 'none';
-  }
+      try {
+        // Prevent double-counting during the same browser session
+        const hasVisited = sessionStorage.getItem("ace_property_visited");
 
-  function sendFirebaseOTP() {
-    const phone = document.getElementById('viewerPhone').value.trim();
-    const tid = document.getElementById('tidInput').value.trim();
-    if (!tid || !phone) {
-      alert("Please enter your JazzCash/EasyPaisa Transaction ID and mobile number.");
-      return;
+        if (!hasVisited) {
+          const snap = await getDoc(statsRef);
+          if (!snap.exists()) {
+            await setDoc(statsRef, { count: 1 });
+          } else {
+            await updateDoc(statsRef, { count: increment(1) });
+          }
+          sessionStorage.setItem("ace_property_visited", "true");
+        }
+
+        // Listen for live updates to the visitor count
+        onSnapshot(statsRef, (docSnap) => {
+          if (docSnap.exists()) {
+            counterEl.textContent = docSnap.data().count.toLocaleString();
+          } else {
+            counterEl.textContent = "1";
+          }
+        });
+      } catch (error) {
+        console.error("Visitor counter error:", error);
+        counterEl.textContent = "Offline (Check Config)";
+      }
     }
 
-    if (window.firebaseAuthInstance) {
-      window.recaptchaVerifier = new window.RecaptchaVerifier(window.firebaseAuthInstance, 'recaptcha-container', { size: 'invisible' });
-      window.signInWithPhoneNumber(window.firebaseAuthInstance, phone, window.recaptchaVerifier)
-        .then(confirmationResult => {
-          window.confirmationResult = confirmationResult;
-          document.getElementById('otpSection').style.display = 'block';
-          alert("📲 Firebase OTP sent to " + phone);
-        })
-        .catch(err => alert("Firebase OTP Error: " + err.message));
-    } else {
-      // Fallback demo mode until Firebase API keys are pasted
-      document.getElementById('otpSection').style.display = 'block';
-      alert("📲 OTP Sent! (Paste your Firebase Config keys in the script to enable live SMS delivery. Demo OTP: 123456)");
-    }
-  }
+    initVisitorCounter();
 
-  function verifyAndUnlock() {
-    const code = document.getElementById('otpCode').value.trim();
-    if (!code) { alert("Enter the 6-digit OTP code."); return; }
-
-    const completeUnlock = () => {
-      const prop = properties.find(p => p.id === activeUnlockId);
-      if (prop) prop.unlocked = true;
-      localStorage.setItem('ace_properties', JSON.stringify(properties));
-      renderProperties();
-      closeModal();
-      alert("✅ OTP Verified! Owner contact number and exact address are now unlocked.");
-    };
-
-    if (window.confirmationResult) {
-      window.confirmationResult.confirm(code)
-        .then(() => completeUnlock())
-        .catch(() => alert("❌ Invalid OTP code. Please try again."));
-    } else if (code === "123456") {
-      completeUnlock();
-    } else {
-      alert("❌ Invalid OTP code.");
-    }
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDe2XvVgMy9uNCUDV2V1c0jSTGgDoUVCuc",
-  authDomain: "ace-property-47c3e.firebaseapp.com",
-  projectId: "ace-property-47c3e",
-  storageBucket: "ace-property-47c3e.firebasestorage.app",
-  messagingSenderId: "17012112788",
-  appId: "1:17012112788:web:149ecf9997a3b983056381",
-  measurementId: "G-1Y3V9TDRSK"
+    // =========================================================================
+Use code with caution.
+// 3. 3-PICTURE SELECTION & PREVIEW VALIDATION
+// =========================================================================
+const imageInput = document.getElementById("prop-images");
+const previewContainer = document.getElementById("image-preview-container");
+const photoCountLabel = document.getElementById("photo-count-label");
+let selectedFiles = [];
+imageInput.addEventListener("change", (e) => {
+const files = Array.from(e.target.files);
+if (files.length > 3) {
+alert("You can only upload a maximum of 3 pictures per property. The first 3 images have been selected.");
+selectedFiles = files.slice(0, 3);
+} else {
+selectedFiles = files;
+}
+photoCountLabel.textContent = ${selectedFiles.length} / 3 selected;
+previewContainer.innerHTML = "";
+if (selectedFiles.length > 0) {
+previewContainer.classList.remove("hidden");
+selectedFiles.forEach((file, index) => {
+const reader = new FileReader();
+reader.onload = (event) => {
+const div = document.createElement("div");
+div.className = "relative rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100";
+div.innerHTML = <img src="${event.target.result}" alt="Preview ${index + 1}" class="w-full h-full object-cover" /> <span class="absolute top-1 left-1 bg-slate-900/75 text-white text-xs px-2 py-0.5 rounded"> Photo ${index + 1} </span>;
+previewContainer.appendChild(div);
 };
+reader.readAsDataURL(file);
+});
+} else {
+previewContainer.classList.add("hidden");
+}
+});
+// =========================================================================
+// 4. UPLOAD IMAGES TO FIREBASE STORAGE & SAVE LISTING TO FIRESTORE
+// =========================================================================
+const propertyForm = document.getElementById("property-form");
+const submitBtn = document.getElementById("submit-btn");
+const statusBox = document.getElementById("upload-status");
+function showStatus(message, isError = false) {
+statusBox.textContent = message;
+statusBox.classList.remove("hidden", "bg-red-100", "text-red-700", "bg-emerald-100", "text-emerald-700");
+if (isError) {
+statusBox.classList.add("bg-red-100", "text-red-700");
+} else {
+statusBox.classList.add("bg-emerald-100", "text-emerald-700");
+}
+}
+propertyForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+if (selectedFiles.length === 0 || selectedFiles.length > 3) {
+showStatus("Please select between 1 and 3 property images.", true);
+return;
+}
+const title = document.getElementById("prop-title").value.trim();
+const price = document.getElementById("prop-price").value.trim();
+const location = document.getElementById("prop-location").value.trim();
+const phone = document.getElementById("prop-phone").value.trim();
+const description = document.getElementById("prop-desc").value.trim();
+submitBtn.disabled = true;
+submitBtn.textContent = "Uploading Images & Publishing...";
+showStatus("Uploading your 3 photos to Firebase Storage. Please wait...");
+try {
+// Upload all selected images (up to 3) in parallel
+const uploadPromises = selectedFiles.map(async (file, idx) => {
+const uniqueName = properties/${Date.now()}_${idx}_${file.name};
+const storageRef = ref(storage, uniqueName);
+const snapshot = await uploadBytes(storageRef, file);
+return await getDownloadURL(snapshot.ref);
+});
+const imageUrls = await Promise.all(uploadPromises);
+// Save listing document to Firestore
+await addDoc(collection(db, "properties"), {
+title,
+price,
+location,
+phone,
+description,
+images: imageUrls,
+createdAt: serverTimestamp()
+});
+showStatus("Success! Your property has been published to ACE PROPERTY.");
+propertyForm.reset();
+selectedFiles = [];
+previewContainer.innerHTML = "";
+previewContainer.classList.add("hidden");
+photoCountLabel.textContent = "0 / 3 selected";
+} catch (error) {
+console.error("Error publishing property:", error);
+showStatus("Upload failed. Please verify your Firebase config and Storage/Firestore rules.", true);
+} finally {
+submitBtn.disabled = false;
+submitBtn.textContent = "Publish Property Listing";
+}
+});
+// =========================================================================
+// 5. REAL-TIME PROPERTY LISTINGS RENDERER (WITH 3-PHOTO SWITCHER)
+// =========================================================================
+const listingsGrid = document.getElementById("listings-grid");
+function loadProperties() {
+const q = query(collection(db, "properties"), orderBy("createdAt", "desc"));
+onSnapshot(q, (snapshot) => {
+listingsGrid.innerHTML = "";
+if (snapshot.empty) {
+listingsGrid.innerHTML = <div class="col-span-full text-center py-12 bg-white rounded-xl border border-slate-200"> <p class="text-slate-600 font-medium">No properties listed yet.</p> <p class="text-slate-400 text-sm mt-1">Be the first to publish a listing below!</p> </div>;
+return;
+}
+snapshot.forEach((docSnap) => {
+const data = docSnap.data();
+const images = data.images && data.images.length > 0
+? data.images
+: ["placeholder.com"];
+const card = document.createElement("div");
+card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col hover:shadow-md transition";
+// Build thumbnail buttons if multiple photos exist
+const thumbsHtml = images.length > 1
+? <div class="flex gap-2 p-2 bg-slate-100 border-b border-slate-200"> ${images.map((imgUrl, i) => 
 
-  renderProperties();
-</script>
-</body>
-</html>
+
+
+).join("")} </div>
+: "";
+card.innerHTML = <div class="relative aspect-video bg-slate-200"> <img src="${images[0]}" alt="${data.title}" class="main-prop-img w-full h-full object-cover" /> <span class="absolute top-3 right-3 bg-slate-900/85 text-amber-400 font-bold text-sm px-3 py-1 rounded-full"> ${data.price} </span> <span class="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-0.5 rounded"> ${images.length} Photo${images.length > 1 ? "s" : ""} </span> </div> ${thumbsHtml} <div class="p-5 flex-1 flex flex-col justify-between"> <div> <h3 class="text-xl font-bold text-slate-900 mb-1">${data.title}</h3> <p class="text-sm text-amber-600 font-medium mb-3">📍 ${data.location}</p> <p class="text-slate-600 text-sm line-clamp-2 mb-4">${data.description}</p> </div> <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-sm"> <span class="text-slate-500 font-medium">📞 ${data.phone}</span> <a href="tel:${data.phone}" class="text-slate-900 font-bold hover:text-amber-600 transition"> Call Agent &rarr; </a> </div> </div>;
+listingsGrid.appendChild(card);
+});
+}, (error) => {
+console.error("Error fetching listings:", error);
+listingsGrid.innerHTML = <div class="col-span-full text-center py-8 bg-red-50 text-red-700 rounded-xl border border-red-200"> Unable to load properties. Make sure you have replaced the <strong>firebaseConfig</strong> credentials in index.html. </div>;
+});
+}
+loadProperties();
+
+
+
+---
+
+### Setup Checklist to Make It Live
+
+To connect this file to your Firebase backend, complete these three steps in your [Firebase Console](https://google.com):
+
+1. **Paste Your Firebase Config:**
+   * Go to **Project Settings** > **General** > **Your apps** (Web app) and copy your `firebaseConfig` object.
+   * Replace the placeholder `firebaseConfig` values inside the `<script type="module">` block of `index.html`.
+2. **Enable Firestore Database:**
+   * Go to **Build** > **Firestore Database** and click **Create database**.
+   * Set up security rules allowing reads and writes for `siteStats/visitors` and `properties`.
+3. **Enable Firebase Storage:**
+   * Go to **Build** > **Storage** and click **Get started**.
+   * Set your Storage rules to allow image uploads under the `properties/` folder (for example, limiting file size to 5MB and restricting uploads to `image/*`).
+
+<FollowUp>
+If you'd like, I can also provide:
+* Secure **Firestore & Storage rules** to protect your database from spam uploads
+* An **Admin Login** toggle so only you can delete or edit property listings
+* Extra **search and filter controls** (by city, price, or property type)
+
+Which addition would be most helpful for your site?
+</FollowUp>
