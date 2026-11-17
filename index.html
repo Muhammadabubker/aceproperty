@@ -3,375 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACE PROPERTY | Premier Real Estate</title>
+  <title>ACE PROPERTY | Direct Owners - Zero Commission</title>
   <script src="https://tailwindcss.com"></script>
+  <!-- Free Interactive Map Library (Leaflet.js) -->
+  <link rel="stylesheet" href="https://unpkg.com" />
+  <script src="https://unpkg.com"></script>
   <style>
-    .line-clamp-2 {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;  
-      overflow: hidden;
-    }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    #global-map, #picker-map { z-index: 10; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-  <!-- Navigation Header -->
-  <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
-      <div class="flex items-center space-x-2">
-        <div class="w-9 h-9 bg-amber-500 rounded-lg flex items-center justify-center font-bold text-slate-900 text-xl">
-          A
+  <!-- Top Navigation -->
+  <header class="bg-slate-950 text-white sticky top-0 z-50 shadow-lg border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center font-black text-slate-950 text-2xl shadow">A</div>
+        <div>
+          <span class="text-xl sm:text-2xl font-extrabold tracking-wider block leading-none">
+            ACE <span class="text-amber-400">PROPERTY</span>
+          </span>
+          <span class="text-[11px] text-emerald-400 font-semibold uppercase tracking-widest">
+            Direct Owners • Zero Commission • Global
+          </span>
         </div>
-        <span class="text-2xl font-extrabold tracking-wider">ACE <span class="text-amber-400">PROPERTY</span></span>
       </div>
 
-      <!-- Live Visitor Counter Badge -->
-      <div class="flex items-center space-x-2 bg-slate-800 border border-slate-700 px-4 py-1.5 rounded-full text-sm">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-        </span>
-        <span class="text-slate-300">Total Site Visits:</span>
-        <span id="visitor-count" class="font-bold text-amber-400">Loading...</span>
+      <div class="flex items-center gap-3">
+        <!-- Admin Mode Toggle -->
+        <button onclick="toggleAdminPanel()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-lg text-amber-300 font-semibold">
+          🔐 Admin OTP Panel
+        </button>
+
+        <!-- Live Visitor Counter -->
+        <div class="flex items-center space-x-2 bg-slate-900 border border-slate-700 px-3.5 py-1.5 rounded-full text-xs sm:text-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span class="text-slate-400">Visitors:</span>
+          <span id="visitor-count" class="font-bold text-amber-400">...</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-        Find Your Dream Space with <span class="text-amber-400">ACE PROPERTY</span>
+  <!-- Hero & Search Bar -->
+  <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white py-12 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <span class="inline-block bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold px-3 py-1 rounded-full mb-3">
+        NO BROKERS • DIRECT OWNER TO BUYER / TENANT
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Buy, Sell & Rent Globally Without Commission
       </h1>
-      <p class="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-        Explore verified residential and commercial listings or publish your own property with high-resolution gallery previews.
+      <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+        Browse verified commercial, domestic, and industrial listings. Unlock direct owner phone numbers and exact map locations for a small fee of <strong>PKR 2,700 or $10</strong>.
       </p>
-      <a href="#list-property" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-8 py-3 rounded-lg shadow-lg transition">
-        + List a Property
-      </a>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#register-property" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-lg transition">
+          + Post Property / Requirement
+        </a>
+        <a href="#map-explorer" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-semibold px-6 py-3 rounded-xl transition">
+          🗺️ Explore Live Map
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+  <!-- Hidden Admin Panel for Approving Payments & Generating OTPs -->
+  <section id="admin-panel" class="hidden max-w-7xl mx-auto px-4 mt-8">
+    <div class="bg-slate-900 text-white p-6 rounded-2xl border-2 border-amber-500 shadow-xl">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-amber-400">Admin Verification & OTP Generator (0300-6604229)</h2>
+        <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-white text-sm">Close ✕</button>
+      </div>
+      <div id="admin-login-box" class="flex gap-3 max-w-md">
+        <input type="password" id="admin-pass" placeholder="Enter Admin PIN (Default: 03006604229)" class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm w-full" />
+        <button onclick="verifyAdmin()" class="bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-sm">Login</button>
+      </div>
+      <div id="admin-requests-list" class="hidden mt-4 space-y-3">
+        <p class="text-xs text-slate-300">Verify JazzCash / EasyPaisa TIDs received on <strong>03006604229</strong> and send the generated 6-digit OTP to the viewer's phone:</p>
+        <div id="payment-requests-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Featured Listings Gallery -->
+  <main class="max-w-7xl mx-auto px-4 py-10 space-y-14">
+
+    <!-- Filter & Global Map Section -->
+    <section id="map-explorer" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Global Property Map & Filter</h2>
+          <p class="text-xs text-slate-500">Exact street pins zoom in automatically once unlocked via OTP</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <select id="filter-role" onchange="renderListings()" class="border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <option value="ALL">All Roles (Seller/Buyer/Landlord/Tenant)</option>
+            <option value="Seller">For Sale (Seller)</option>
+            <option value="Buyer">Wanted to Buy (Buyer)</option>
+            <option value="Landlord">For Rent (Landlord)</option>
+            <option value="Tenant">Wanted to Rent (Tenant)</option>
+          </select>
+          <select id="filter-category" onchange="renderListings()" class="border border-slate-300 rounded-lg px-3 py-2 text-sm">
+            <option value="ALL">All Categories</option>
+            <option value="Domestic">Domestic / Residential</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Agricultural">Agricultural / Plot</option>
+          </select>
+        </div>
+      </div>
+      <div id="global-map" class="w-full h-80 rounded-xl border border-slate-300"></div>
+    </section>
+
+    <!-- Listings Grid -->
     <section>
-      <div class="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
-        <div>
-          <h2 class="text-3xl font-bold text-slate-900">Featured Listings</h2>
-          <p class="text-slate-500 mt-1">Real-time updates powered by Firebase Firestore</p>
-        </div>
-      </div>
-
-      <!-- Listings Grid -->
-      <div id="listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="col-span-full text-center py-12 text-slate-500" id="loading-listings">
-          Connecting to ACE PROPERTY database...
-        </div>
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Verified Listings & Requirements</h2>
+      <div id="listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full text-center py-10 text-slate-500">Loading ACE PROPERTY listings...</div>
       </div>
     </section>
 
-    <!-- Submit Property Form (With 3-Picture Upload) -->
-    <section id="list-property" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 max-w-3xl mx-auto">
-      <div class="mb-6">
-        <h2 class="text-2xl font-bold text-slate-900">List Your Property</h2>
-        <p class="text-slate-500 text-sm mt-1">Fill out the details below and upload up to 3 property photos.</p>
+    <!-- Comprehensive Registration & Property Submission Form -->
+    <section id="register-property" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10">
+      <div class="border-b border-slate-200 pb-4 mb-6">
+        <h2 class="text-2xl font-bold text-slate-900">ACE PROPERTY Registration & Listing Form</h2>
+        <p class="text-sm text-slate-500 mt-1">Direct Owners, Buyers, Landlords & Tenants. Your phone number and exact street address remain hidden until a viewer completes payment & OTP verification.</p>
       </div>
 
-      <form id="property-form" class="space-y-6">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1">Property Title *</label>
-            <input type="text" id="prop-title" required placeholder="e.g., Modern 5 Marla Villa"
-              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1">Price (PKR / USD) *</label>
-            <input type="text" id="prop-price" required placeholder="e.g., PKR 2.5 Crore"
-              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1">Location *</label>
-            <input type="text" id="prop-location" required placeholder="e.g., Canal Road, Faisalabad"
-              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1">Contact Phone *</label>
-            <input type="tel" id="prop-phone" required placeholder="e.g., +92 300 1234567"
-              class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500" />
-          </div>
-        </div>
-
+      <form id="property-form" class="space-y-8">
+        <!-- 1. Role, Category & Contact (Hidden Publicly) -->
         <div>
-          <label class="block text-sm font-semibold text-slate-700 mb-1">Description *</label>
-          <textarea id="prop-desc" rows="3" required placeholder="Bedrooms, bathrooms, nearby landmarks, etc."
-            class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
-        </div>
-
-        <!-- 3 Picture Upload Section -->
-        <div class="bg-slate-50 p-5 rounded-xl border border-dashed border-slate-300">
-          <div class="flex justify-between items-center mb-3">
-            <label class="block text-sm font-semibold text-slate-700">
-              Upload Property Photos (Max 3 Images) *
-            </label>
-            <span id="photo-count-label" class="text-xs font-medium text-slate-500">0 / 3 selected</span>
+          <h3 class="text-sm font-bold uppercase tracking-wider text-amber-600 mb-3">1. Party Role & Protected Contact Info</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">I am a *</label>
+              <select id="f-role" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+                <option value="Seller">Seller (Selling Property)</option>
+                <option value="Buyer">Buyer (Looking to Buy)</option>
+                <option value="Landlord">Landlord (Giving on Rent)</option>
+                <option value="Tenant">Tenant (Looking for Rent)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Category *</label>
+              <select id="f-category" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+                <option value="Domestic">Domestic / Residential</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Agricultural">Agricultural / Land</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+              <input type="text" id="f-name" required placeholder="Owner / Applicant Name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Direct Phone (Hidden) *</label>
+              <input type="tel" id="f-phone" required placeholder="+92 300 0000000" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm bg-amber-50/50" />
+            </div>
           </div>
-
-          <input type="file" id="prop-images" accept="image/*" multiple required
-            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-900 file:text-white hover:file:bg-slate-700 cursor-pointer" />
-          
-          <p class="text-xs text-slate-400 mt-2">Supported formats: JPG, PNG, WEBP. Select up to 3 files at once.</p>
-
-          <!-- Image Preview Grid -->
-          <div id="image-preview-container" class="grid grid-cols-3 gap-4 mt-4 hidden"></div>
         </div>
 
-        <!-- Status & Submit Button -->
-        <div id="upload-status" class="hidden text-sm font-medium p-3 rounded-lg"></div>
-
-        <button type="submit" id="submit-btn"
-          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-lg shadow transition flex justify-center items-center">
-          Publish Property Listing
-        </button>
-      </form>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm mt-16">
-    <p>&copy; <span id="year"></span> ACE PROPERTY. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Firebase Modular SDK (v11) -->
-  <script type="module">
-    import { initializeApp } from "https://gstatic.com";
-    import { 
-      getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, query, orderBy, serverTimestamp 
-    } from "https://gstatic.com";
-    import { 
-      getStorage, ref, uploadBytes, getDownloadURL 
-    } from "https://gstatic.com";
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // =========================================================================
-    // 1. REPLACE WITH YOUR ACTUAL FIREBASE PROJECT CONFIGURATION
-    // =========================================================================
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_://firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-
-    // =========================================================================
-    // 2. LIVE VISITOR COUNTER (FIRESTORE ATOMIC INCREMENT)
-    // =========================================================================
-    async function initVisitorCounter() {
-      const counterEl = document.getElementById("visitor-count");
-      const statsRef = doc(db, "siteStats", "visitors");
-
-      try {
-        // Prevent double-counting during the same browser session
-        const hasVisited = sessionStorage.getItem("ace_property_visited");
-
-        if (!hasVisited) {
-          const snap = await getDoc(statsRef);
-          if (!snap.exists()) {
-            await setDoc(statsRef, { count: 1 });
-          } else {
-            await updateDoc(statsRef, { count: increment(1) });
-          }
-          sessionStorage.setItem("ace_property_visited", "true");
-        }
-
-        // Listen for live updates to the visitor count
-        onSnapshot(statsRef, (docSnap) => {
-          if (docSnap.exists()) {
-            counterEl.textContent = docSnap.data().count.toLocaleString();
-          } else {
-            counterEl.textContent = "1";
-          }
-        });
-      } catch (error) {
-        console.error("Visitor counter error:", error);
-        counterEl.textContent = "Offline (Check Config)";
-      }
-    }
-
-    initVisitorCounter();
-
-    // =========================================================================
-Use code with caution.
-// 3. 3-PICTURE SELECTION & PREVIEW VALIDATION
-// =========================================================================
-const imageInput = document.getElementById("prop-images");
-const previewContainer = document.getElementById("image-preview-container");
-const photoCountLabel = document.getElementById("photo-count-label");
-let selectedFiles = [];
-imageInput.addEventListener("change", (e) => {
-const files = Array.from(e.target.files);
-if (files.length > 3) {
-alert("You can only upload a maximum of 3 pictures per property. The first 3 images have been selected.");
-selectedFiles = files.slice(0, 3);
-} else {
-selectedFiles = files;
-}
-photoCountLabel.textContent = ${selectedFiles.length} / 3 selected;
-previewContainer.innerHTML = "";
-if (selectedFiles.length > 0) {
-previewContainer.classList.remove("hidden");
-selectedFiles.forEach((file, index) => {
-const reader = new FileReader();
-reader.onload = (event) => {
-const div = document.createElement("div");
-div.className = "relative rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100";
-div.innerHTML = <img src="${event.target.result}" alt="Preview ${index + 1}" class="w-full h-full object-cover" /> <span class="absolute top-1 left-1 bg-slate-900/75 text-white text-xs px-2 py-0.5 rounded"> Photo ${index + 1} </span>;
-previewContainer.appendChild(div);
-};
-reader.readAsDataURL(file);
-});
-} else {
-previewContainer.classList.add("hidden");
-}
-});
-// =========================================================================
-// 4. UPLOAD IMAGES TO FIREBASE STORAGE & SAVE LISTING TO FIRESTORE
-// =========================================================================
-const propertyForm = document.getElementById("property-form");
-const submitBtn = document.getElementById("submit-btn");
-const statusBox = document.getElementById("upload-status");
-function showStatus(message, isError = false) {
-statusBox.textContent = message;
-statusBox.classList.remove("hidden", "bg-red-100", "text-red-700", "bg-emerald-100", "text-emerald-700");
-if (isError) {
-statusBox.classList.add("bg-red-100", "text-red-700");
-} else {
-statusBox.classList.add("bg-emerald-100", "text-emerald-700");
-}
-}
-propertyForm.addEventListener("submit", async (e) => {
-e.preventDefault();
-if (selectedFiles.length === 0 || selectedFiles.length > 3) {
-showStatus("Please select between 1 and 3 property images.", true);
-return;
-}
-const title = document.getElementById("prop-title").value.trim();
-const price = document.getElementById("prop-price").value.trim();
-const location = document.getElementById("prop-location").value.trim();
-const phone = document.getElementById("prop-phone").value.trim();
-const description = document.getElementById("prop-desc").value.trim();
-submitBtn.disabled = true;
-submitBtn.textContent = "Uploading Images & Publishing...";
-showStatus("Uploading your 3 photos to Firebase Storage. Please wait...");
-try {
-// Upload all selected images (up to 3) in parallel
-const uploadPromises = selectedFiles.map(async (file, idx) => {
-const uniqueName = properties/${Date.now()}_${idx}_${file.name};
-const storageRef = ref(storage, uniqueName);
-const snapshot = await uploadBytes(storageRef, file);
-return await getDownloadURL(snapshot.ref);
-});
-const imageUrls = await Promise.all(uploadPromises);
-// Save listing document to Firestore
-await addDoc(collection(db, "properties"), {
-title,
-price,
-location,
-phone,
-description,
-images: imageUrls,
-createdAt: serverTimestamp()
-});
-showStatus("Success! Your property has been published to ACE PROPERTY.");
-propertyForm.reset();
-selectedFiles = [];
-previewContainer.innerHTML = "";
-previewContainer.classList.add("hidden");
-photoCountLabel.textContent = "0 / 3 selected";
-} catch (error) {
-console.error("Error publishing property:", error);
-showStatus("Upload failed. Please verify your Firebase config and Storage/Firestore rules.", true);
-} finally {
-submitBtn.disabled = false;
-submitBtn.textContent = "Publish Property Listing";
-}
-});
-// =========================================================================
-// 5. REAL-TIME PROPERTY LISTINGS RENDERER (WITH 3-PHOTO SWITCHER)
-// =========================================================================
-const listingsGrid = document.getElementById("listings-grid");
-function loadProperties() {
-const q = query(collection(db, "properties"), orderBy("createdAt", "desc"));
-onSnapshot(q, (snapshot) => {
-listingsGrid.innerHTML = "";
-if (snapshot.empty) {
-listingsGrid.innerHTML = <div class="col-span-full text-center py-12 bg-white rounded-xl border border-slate-200"> <p class="text-slate-600 font-medium">No properties listed yet.</p> <p class="text-slate-400 text-sm mt-1">Be the first to publish a listing below!</p> </div>;
-return;
-}
-snapshot.forEach((docSnap) => {
-const data = docSnap.data();
-const images = data.images && data.images.length > 0
-? data.images
-: ["placeholder.com"];
-const card = document.createElement("div");
-card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col hover:shadow-md transition";
-// Build thumbnail buttons if multiple photos exist
-const thumbsHtml = images.length > 1
-? <div class="flex gap-2 p-2 bg-slate-100 border-b border-slate-200"> ${images.map((imgUrl, i) => 
-
-
-
-).join("")} </div>
-: "";
-card.innerHTML = <div class="relative aspect-video bg-slate-200"> <img src="${images[0]}" alt="${data.title}" class="main-prop-img w-full h-full object-cover" /> <span class="absolute top-3 right-3 bg-slate-900/85 text-amber-400 font-bold text-sm px-3 py-1 rounded-full"> ${data.price} </span> <span class="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-0.5 rounded"> ${images.length} Photo${images.length > 1 ? "s" : ""} </span> </div> ${thumbsHtml} <div class="p-5 flex-1 flex flex-col justify-between"> <div> <h3 class="text-xl font-bold text-slate-900 mb-1">${data.title}</h3> <p class="text-sm text-amber-600 font-medium mb-3">📍 ${data.location}</p> <p class="text-slate-600 text-sm line-clamp-2 mb-4">${data.description}</p> </div> <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-sm"> <span class="text-slate-500 font-medium">📞 ${data.phone}</span> <a href="tel:${data.phone}" class="text-slate-900 font-bold hover:text-amber-600 transition"> Call Agent &rarr; </a> </div> </div>;
-listingsGrid.appendChild(card);
-});
-}, (error) => {
-console.error("Error fetching listings:", error);
-listingsGrid.innerHTML = <div class="col-span-full text-center py-8 bg-red-50 text-red-700 rounded-xl border border-red-200"> Unable to load properties. Make sure you have replaced the <strong>firebaseConfig</strong> credentials in index.html. </div>;
-});
-}
-loadProperties();
-
-
-
----
-
-### Setup Checklist to Make It Live
-
-To connect this file to your Firebase backend, complete these three steps in your [Firebase Console](https://google.com):
-
-1. **Paste Your Firebase Config:**
-   * Go to **Project Settings** > **General** > **Your apps** (Web app) and copy your `firebaseConfig` object.
-   * Replace the placeholder `firebaseConfig` values inside the `<script type="module">` block of `index.html`.
-2. **Enable Firestore Database:**
-   * Go to **Build** > **Firestore Database** and click **Create database**.
-   * Set up security rules allowing reads and writes for `siteStats/visitors` and `properties`.
-3. **Enable Firebase Storage:**
-   * Go to **Build** > **Storage** and click **Get started**.
-   * Set your Storage rules to allow image uploads under the `properties/` folder (for example, limiting file size to 5MB and restricting uploads to `image/*`).
-
-<FollowUp>
-If you'd like, I can also provide:
-* Secure **Firestore & Storage rules** to protect your database from spam uploads
-* An **Admin Login** toggle so only you can delete or edit property listings
-* Extra **search and filter controls** (by city, price, or property type)
-
-Which addition would be most helpful for your site?
-</FollowUp>
+        <!-- 2. Location, Road Type & Financials -->
+        <div>
+          <h3 class="text-sm font-bold uppercase tracking-wider text-amber-600 mb-3">2. Location, Demand / Rent & Installments</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
