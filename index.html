@@ -1,6 +1,14 @@
-projectId: "aceproperty-8a02d"
-https://github.com/Muhammadabubker/aceproperty
-<!DOCTYPE html>
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
+  authDomain: "aceproperty-8a02d.firebaseapp.com",
+  databaseURL: "https://aceproperty-8a02d-default-rtdb.firebaseio.com",
+  projectId: "aceproperty-8a02d",
+  storageBucket: "aceproperty-8a02d.firebasestorage.app",
+  messagingSenderId: "195642216443",
+  appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
+  measurementId: "G-RDT5E0XYQC"
+};<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -208,6 +216,17 @@ https://github.com/Muhammadabubker/aceproperty
       margin-bottom: 0.25rem;
     }
 
+    .payment-tag {
+      font-size: 0.75rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
     .card-title {
       font-size: 1.15rem;
       font-weight: 600;
@@ -226,10 +245,23 @@ https://github.com/Muhammadabubker/aceproperty
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 0.6rem 0;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
       font-size: 0.88rem;
       color: var(--text-main);
       font-weight: 500;
+    }
+
+    .custom-details {
+      background: #f1f5f9;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.83rem;
+      margin-bottom: 0.85rem;
+      color: var(--text-main);
+    }
+
+    .custom-details div {
+      margin-bottom: 0.2rem;
     }
 
     .description {
@@ -311,6 +343,21 @@ https://github.com/Muhammadabubker/aceproperty
       border-color: var(--primary);
     }
 
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
     .form-actions {
       margin-top: 1.5rem;
       display: flex;
@@ -386,7 +433,7 @@ https://github.com/Muhammadabubker/aceproperty
     <!-- Property Listings Section -->
     <section id="listings">
       <div class="section-header">
-        <h2>Featured Property Listings (<span id="listing-count">0</span>)</h2>
+        <h2>Featured Property Listings (<span id="listingCount">0</span>)</h2>
         <div class="filter-bar">
           <input type="text" id="searchInput" placeholder="Search city or title..." />
           <select id="statusFilter">
@@ -399,127 +446,14 @@ https://github.com/Muhammadabubker/aceproperty
             <option value="House">House</option>
             <option value="Apartment">Apartment</option>
             <option value="Commercial">Commercial</option>
-            <option value="Plot">Plot / Land</option>
+            <option value="Plot / Land">Plot / Land</option>
           </select>
         </div>
       </div>
 
       <div class="property-grid" id="propertyGrid">
-        <!-- Cards are injected dynamically via JavaScript -->
+        <!-- Property cards will load here dynamically -->
       </div>
     </section>
 
     <!-- Data Entry Form Section -->
-    <section id="add-property" class="form-section">
-      <div class="section-header">
-        <h2>Property Data Entry Form</h2>
-      </div>
-
-      <form id="propertyForm">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="title">Property Title *</label>
-            <input type="text" id="title" placeholder="e.g., Modern 4-Bed Family Villa" required />
-          </div>
-
-          <div class="form-group">
-            <label for="price">Price / Monthly Rent ($) *</label>
-            <input type="number" id="price" placeholder="e.g., 450000" min="1" required />
-          </div>
-
-          <div class="form-group">
-            <label for="status">Listing Status *</label>
-            <select id="status" required>
-              <option value="For Sale">For Sale</option>
-              <option value="For Rent">For Rent</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="type">Property Type *</label>
-            <select id="type" required>
-              <option value="House">House</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Commercial">Commercial</option>
-              <option value="Plot">Plot / Land</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="location">City / Address *</label>
-            <input type="text" id="location" placeholder="e.g., Downtown, Metro City" required />
-          </div>
-
-          <div class="form-group">
-            <label for="area">Area Size (sq ft) *</label>
-            <input type="number" id="area" placeholder="e.g., 2400" min="50" required />
-          </div>
-
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <input type="number" id="bedrooms" value="3" min="0" />
-          </div>
-
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <input type="number" id="bathrooms" value="2" min="0" />
-          </div>
-
-          <div class="form-group">
-            <label for="agentName">Agent / Contact Name *</label>
-            <input type="text" id="agentName" placeholder="e.g., Sarah Jenkins" required />
-          </div>
-
-          <div class="form-group">
-            <label for="imageUrl">Image URL (Optional)</label>
-            <input type="url" id="imageUrl" placeholder="https://example.com" />
-          </div>
-
-          <div class="form-group full-width">
-            <label for="description">Property Description *</label>
-            <textarea id="description" rows="3" placeholder="Enter key highlights, neighborhood perks, and amenities..." required></textarea>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="submit-btn">Publish Property</button>
-          <button type="reset" class="reset-btn">Clear Form</button>
-          <span id="statusMsg" class="status-msg"></span>
-        </div>
-      </form>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 AceProperty Real Estate Portal. All rights reserved.</p>
-  </footer>
-
-  <!-- Application Script -->
-  <script>
-</body>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
-    authDomain: "aceproperty-8a02d.firebaseapp.com",
-    projectId: "aceproperty-8a02d",
-    storageBucket: "aceproperty-8a02d.firebasestorage.app",
-    messagingSenderId: "195642216443",
-    appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
-    measurementId: "G-RDT5E0XYQC"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-</html>
