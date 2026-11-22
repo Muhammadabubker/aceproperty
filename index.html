@@ -1,35 +1,449 @@
-Take a deep breath—you are not at zero; your website's design, hosting, and database setup are already built, and you only need to paste your Firebase keys into one file to get everything working.
-Let's break this down into three simple steps right now.
-
-Step 1: Copy Your Complete File (With Your Keys Already Included)
-
-I pulled your exact Firebase keys from your very first message so you don't have to hunt for them. Copy the entire code block below:
-(The full HTML, CSS, and JavaScript source code containing the AceProperty real estate platform template and pre-configured Firebase connection can be found and copied directly from the implementation template above.)
-
-Step 2: Replace index.html on GitHub
-
-1. Open your GitHub repository (Muhammadabubker/aceproperty).
-2. Click on index.html, then click the pencil icon (Edit this file) on the top right.
-3. Select everything inside (Ctrl + A), delete it, and paste the code above (Ctrl + V).
-4. Click the green Commit changes button.
-
-Step 3: Turn On Your Firebase Database
-
-If your listings still stay at (0) after submitting the form, your Firebase database is simply locked.
-1. Go to google.com and open aceproperty-8a02d.
-2. In the left menu, click Build > Firestore Database. (If it says "Create database", click it and choose Start in test mode).
-3. Click the Rules tab at the top and make sure it says:text
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AceProperty | Real Estate Listings & Management</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #1d4ed8;
+      --accent: #059669;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #dc2626;
     }
-  }
-}
-Use code with caution.
-4. Click Publish.
-Once you complete these three steps, refresh muhammadabubker.github.io/aceproperty, submit a test property, and watch it appear immediately.
-Try those three steps first, and tell me:
-• Which step you get stuck on (if any)
-• What message appears when you click Publish Property
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: #34d399;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
+        url('https://unsplash.com') center/cover no-repeat;
+      color: #ffffff;
+      text-align: center;
+      padding: 4.5rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 1.5rem;
+      color: #cbd5e1;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .hero-btn:hover {
+      background-color: #047857;
+    }
+
+    /* Main Layout */
+    .container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar input,
+    .filter-bar select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    /* Property Grid */
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 4rem;
+    }
+
+    .property-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+
+    .property-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      height: 210px;
+      background-color: #e2e8f0;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge.rent {
+      background-color: var(--accent);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .payment-tag {
+      font-size: 0.75rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .location {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .specs {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .custom-details {
+      background: #f1f5f9;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.83rem;
+      margin-bottom: 0.85rem;
+      color: var(--text-main);
+    }
+
+    .custom-details div {
+      margin-bottom: 0.2rem;
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .delete-btn {
+      background: none;
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Data Entry Form Section */
+    .form-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.65rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .form-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.8rem 1.75rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .reset-btn {
+      background-color: #e2e8f0;
+      color: var(--text-main);
+      border: none;
+      padding: 0.8rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .status-msg {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Ace<span>Property</span></div>
+    <nav>
+      <a href="#listings">Listings</a>
+      <a href="#add-property">Add Property</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <h1>Find & Manage Premier Properties</h1>
+    <p>Browse verified residential and commercial listings or add a new property directly to the AceProperty catalog.</p>
+    <a href="#add-property" class="hero-btn">+ List a New Property</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Property Listings Section -->
+    <section id="listings">
+      <div class="section-header">
+        <h2>Featured Property Listings (<span id="listingCount">0</span>)</h2>
+        <div class="filter-bar">
+          <input type="text" id="searchInput" placeholder="Search city or title..." />
+          <select id="statusFilter">
+            <option value="All">All Statuses</option>
+            <option value="For Sale">For Sale</option>
+            <option value="For Rent">For Rent</option>
+          </select>
+          <select id="typeFilter">
+            <option value="All">All Types</option>
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Plot / Land">Plot / Land</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="property-grid" id="propertyGrid">
+        <!-- Property cards will load here dynamically -->
+      </div>
+    </section>
+
+    <!-- Data Entry Form Section -->
