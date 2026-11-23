@@ -292,3 +292,40 @@
     <!-- Row 8: Dual Phone Numbers (1st Agent Public, 2nd Owner Hidden) -->
     <h3 style="margin: 18px 0 10px; color: #0f2942; font-size: 16px;">📞 Dual Contact Numbers & Address Details</h3>
 </div>
+<!-- DUAL CONTACT NUMBERS & PUBLISH BUTTON -->
+<div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 18px; border-radius: 8px; margin-top: 18px;">
+  <h3 style="color: #0f2942; font-size: 16px; margin-bottom: 12px;">
+    📞 Dual Contact Numbers & Exact Address
+  </h3>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 14px;">
+    <!-- 1st Phone: Public -->
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-size: 13px; font-weight: 700; color: #1e3a8a; margin-bottom: 5px;">
+        1st Phone No: Agent / Reference (Public) *
+      </label>
+      <input type="tel" id="agentPhone" placeholder="e.g. +92-300-XXXXXXX" required style="padding: 10px; border: 1px solid #93c5fd; border-radius: 6px; background: #eff6ff;">
+    </div>
+
+    <!-- 2nd Phone: Hidden behind $10 / PKR 2,700 or $25 Paywall -->
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-size: 13px; font-weight: 700; color: #b91c1c; margin-bottom: 5px;">
+        2nd Phone No: Direct Owner (Hidden) *
+      </label>
+      <input type="tel" id="ownerPhone" placeholder="e.g. +92-300-6604229" required style="padding: 10px; border: 1px solid #fca5a5; border-radius: 6px; background: #fef2f2;">
+    </div>
+
+    <!-- Exact Address: Hidden -->
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-size: 13px; font-weight: 700; color: #b91c1c; margin-bottom: 5px;">
+        Owner Name & Exact Address (Hidden) *
+      </label>
+      <input type="text" id="exactAddress" placeholder="Owner Name, House/Plot #, Street, City" required style="padding: 10px; border: 1px solid #fca5a5; border-radius: 6px; background: #fef2f2;">
+    </div>
+  </div>
+
+  <!-- PUBLISH PROPERTY BUTTON -->
+  <button type="submit" style="background: #15803d; color: #ffffff; border: none; padding: 15px 24px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; box-shadow: 0 3px 6px rgba(21, 128, 61, 0.25);">
+    🚀 Publish Property Globally on ACE PROPERTY
+  </button>
+</div>
