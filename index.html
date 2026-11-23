@@ -1,449 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AceProperty | Real Estate Listings & Management</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Friendly Meta Tags & SSL Security -->
+  <title>ACE PROPERTY | Direct Owners Contact — No Commission | Global Real Estate</title>
+  <meta name="description" content="Buy, sell, and rent Commercial, Domestic, and Industrial properties globally on ACE PROPERTY. Direct Owners contact with no commission, Google Maps pins, 3+ photos, and installment plans.">
+  <meta name="keywords" content="ACE PROPERTY, direct owner property, no commission real estate, commercial plots, domestic houses, industrial land, installment property Pakistan global, Zillow alternative, Zameen alternative">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://web.app">
+
+  <!-- Open Graph / Social Media Sharing -->
+  <meta property="og:title" content="ACE PROPERTY | Direct Owners Contact — No Commission">
+  <meta property="og:description" content="Global property portal for Sellers, Buyers, Landlords, and Tenants. Verified Google Maps locations and direct owner contacts.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Analytics (gtag.js) Linked to Your Measurement ID -->
+  <script async src="https://googletagmanager.com"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RDT5E0XYQC');
+  </script>
+
+  <!-- Schema.org Structured Data for Free Search Engine Indexing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "ACE PROPERTY",
+    "description": "Direct Owners Contact — No Commission Global Real Estate Portal",
+    "url": "https://web.app",
+    "telephone": "+92-300-6604229",
+    "areaServed": "Global"
+  }
+  </script>
+
   <style>
     :root {
-      --primary: #1e3a8a;
-      --primary-hover: #1d4ed8;
-      --accent: #059669;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --danger: #dc2626;
+      --primary: #0f2942;
+      --secondary: #1e40af;
+      --accent: #d97706;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --border: #cbd5e1;
+      --success: #15803d;
+      --danger: #b91c1c;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    /* Top Navigation & Header */
+    header { background: linear-gradient(135deg, var(--primary), #1e3a8a); color: #fff; padding: 24px 15px; text-align: center; }
+    header h1 { font-size: 30px; letter-spacing: 1.2px; font-weight: 800; }
+    header p { color: #e2e8f0; font-size: 15px; margin-top: 5px; }
+    .counters { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    .counter-box { background: rgba(255,255,255,0.14); padding: 8px 14px; border-radius: 6px; font-size: 13px; border: 1px solid rgba(255,255,255,0.2); }
+    .counter-box strong { color: #fbbf24; font-size: 16px; }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-
-    /* Header & Navigation */
-    header {
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .logo span {
-      color: #34d399;
-    }
-
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-
-    nav a:hover {
-      opacity: 0.8;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
-        url('https://unsplash.com') center/cover no-repeat;
-      color: #ffffff;
-      text-align: center;
-      padding: 4.5rem 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 650px;
-      margin: 0 auto 1.5rem;
-      color: #cbd5e1;
-    }
-
-    .hero-btn {
-      display: inline-block;
-      background-color: var(--accent);
-      color: #ffffff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .hero-btn:hover {
-      background-color: #047857;
-    }
+    /* Caution Policy Banner */
+    .caution-banner { max-width: 1180px; margin: 16px auto; background: #fef3c7; color: #92400e; border-left: 5px solid var(--accent); padding: 14px 18px; border-radius: 6px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
     /* Main Layout */
-    .container {
-      max-width: 1200px;
-      margin: 2.5rem auto;
-      padding: 0 1.5rem;
-    }
+    .container { max-width: 1180px; margin: 20px auto; padding: 0 15px; }
+    .section-title { color: var(--primary); font-size: 22px; margin-bottom: 14px; border-bottom: 2px solid var(--border); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 0.75rem;
-    }
+    /* Search & Filter Bar */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+    .filter-btn { padding: 8px 15px; border: 1px solid var(--primary); background: #fff; color: var(--primary); border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); color: #fff; }
+    .search-input { padding: 8px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: 13px; min-width: 240px; }
 
-    .section-header h2 {
-      font-size: 1.6rem;
-      color: var(--primary);
-    }
+    /* Listings Grid */
+    .listings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; margin-bottom: 40px; }
+    .prop-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.07); display: flex; flex-direction: column; }
+    .gallery-strip { display: grid; grid-template-columns: 2fr 1fr; gap: 2px; height: 195px; background: #cbd5e1; }
+    .gallery-strip img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-side { display: grid; grid-template-rows: 1fr 1fr; gap: 2px; height: 195px; }
+    .prop-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .badge { display: inline-block; background: var(--primary); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-right: 4px; margin-bottom: 4px; }
+    .badge-role { background: var(--accent); }
+    .prop-price { font-size: 20px; font-weight: 800; color: var(--success); margin: 6px 0; }
+    .prop-detail { font-size: 13px; margin-bottom: 4px; color: #334155; }
+    .map-embed { width: 100%; height: 130px; border: 1px solid var(--border); border-radius: 6px; margin: 8px 0; }
 
-    /* Filter Bar */
-    .filter-bar {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
+    /* Dual Phone Numbers Box */
+    .agent-box { background: #eff6ff; border: 1px solid #bfdbfe; padding: 8px 12px; border-radius: 6px; font-size: 13px; margin-top: 8px; color: #1e3a8a; }
+    .locked-box { background: #fef2f2; border: 1px dashed var(--danger); padding: 12px; border-radius: 6px; margin-top: 8px; font-size: 13px; }
+    .unlocked-box { background: #f0fdf4; border: 1px solid var(--success); padding: 12px; border-radius: 6px; margin-top: 8px; font-size: 13px; }
+    .btn-unlock { background: var(--accent); color: #fff; border: none; padding: 9px 12px; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 8px; width: 100%; font-size: 13px; }
+    .btn-unlock:hover { background: #b45309; }
 
-    .filter-bar input,
-    .filter-bar select {
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-    }
+    /* Registration Form Card */
+    .card { background: var(--card); padding: 26px; border-radius: 10px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); margin-bottom: 40px; border-top: 4px solid var(--primary); }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; }
+    label { font-size: 13px; font-weight: 700; margin-bottom: 5px; color: #1e293b; }
+    input, select { padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; background: #fff; }
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 14px; padding: 8px 0; }
+    .checkbox-group label { font-weight: 500; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .btn-submit { background: var(--success); color: #fff; border: none; padding: 15px 24px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 12px; }
+    .btn-submit:hover { background: #166534; }
 
-    /* Property Grid */
-    .property-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.75rem;
-      margin-bottom: 4rem;
-    }
+    /* Payment & OTP Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: #fff; padding: 24px; border-radius: 10px; max-width: 450px; width: 92%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .close-btn { float: right; font-size: 24px; cursor: pointer; font-weight: bold; color: #64748b; }
+    #recaptcha-container { margin: 10px 0; }
 
-    .property-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s;
-    }
-
-    .property-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card-img-wrapper {
-      position: relative;
-      height: 210px;
-      background-color: #e2e8f0;
-    }
-
-    .card-img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .badge.rent {
-      background-color: var(--accent);
-    }
-
-    .card-body {
-      padding: 1.25rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .price {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-    }
-
-    .payment-tag {
-      font-size: 0.75rem;
-      background: #e0f2fe;
-      color: #0369a1;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 600;
-      vertical-align: middle;
-      margin-left: 6px;
-    }
-
-    .card-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-
-    .location {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.85rem;
-    }
-
-    .specs {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 0.6rem 0;
-      margin-bottom: 0.75rem;
-      font-size: 0.88rem;
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .custom-details {
-      background: #f1f5f9;
-      padding: 0.6rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.83rem;
-      margin-bottom: 0.85rem;
-      color: var(--text-main);
-    }
-
-    .custom-details div {
-      margin-bottom: 0.2rem;
-    }
-
-    .description {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      flex-grow: 1;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .delete-btn {
-      background: none;
-      border: 1px solid var(--danger);
-      color: var(--danger);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-
-    .delete-btn:hover {
-      background: var(--danger);
-      color: #ffffff;
-    }
-
-    /* Data Entry Form Section */
-    .form-section {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--text-main);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 0.65rem 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--primary);
-    }
-
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 0.5rem 0;
-    }
-
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .form-actions {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .submit-btn {
-      background-color: var(--primary);
-      color: #ffffff;
-      border: none;
-      padding: 0.8rem 1.75rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .submit-btn:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .reset-btn {
-      background-color: #e2e8f0;
-      color: var(--text-main);
-      border: none;
-      padding: 0.8rem 1.25rem;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .status-msg {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #0f172a;
-      color: #94a3b8;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-    }
+    footer { background: var(--primary); color: #cbd5e1; text-align: center; padding: 20px; font-size: 13px; margin-top: 30px; }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">Ace<span>Property</span></div>
-    <nav>
-      <a href="#listings">Listings</a>
-      <a href="#add-property">Add Property</a>
-    </nav>
-  </header>
+<header>
+  <h1>ACE PROPERTY</h1>
+  <p>Direct Owners Contact — No Commission | Global Property Portal & App</p>
+  <div class="counters">
+    <div class="counter-box">👁️ Global Visitors: <strong id="visitor-count">1,050</strong></div>
+    <div class="counter-box">🏢 Total Listed: <strong id="total-count">0</strong></div>
+    <div class="counter-box">🏪 Commercial: <strong id="comm-count">0</strong></div>
+    <div class="counter-box">🏠 Domestic: <strong id="dom-count">0</strong></div>
+    <div class="counter-box">🏭 Industrial: <strong id="ind-count">0</strong></div>
+  </div>
+</header>
 
-  <!-- Hero Banner -->
-  <section class="hero">
-    <h1>Find & Manage Premier Properties</h1>
-    <p>Browse verified residential and commercial listings or add a new property directly to the AceProperty catalog.</p>
-    <a href="#add-property" class="hero-btn">+ List a New Property</a>
-  </section>
+<div class="caution-banner">
+  <strong>⚠️ CAUTION & DIRECT OWNER VERIFICATION POLICY:</strong>
+  Every listing displays the <strong>Agent/Reference Number</strong> publicly, while the <strong>Direct Owner's Phone Number & Exact Address</strong> remain hidden to prevent unauthorized broker interference. Pay a short fee of <strong>$10 (or equivalent PKR)</strong> locally via <strong>JazzCash, EasyPaisa, or SadaPay to 03006604229</strong> (or <strong>$25 Foreign</strong>) and verify via <strong>Firebase Mobile OTP</strong> to unlock Direct Owner Contact globally.
+</div>
 
-  <!-- Main Content -->
-  <main class="container">
+<div class="container">
 
-    <!-- Property Listings Section -->
-    <section id="listings">
-      <div class="section-header">
-        <h2>Featured Property Listings (<span id="listingCount">0</span>)</h2>
-        <div class="filter-bar">
-          <input type="text" id="searchInput" placeholder="Search city or title..." />
-          <select id="statusFilter">
-            <option value="All">All Statuses</option>
-            <option value="For Sale">For Sale</option>
-            <option value="For Rent">For Rent</option>
-          </select>
-          <select id="typeFilter">
-            <option value="All">All Types</option>
-            <option value="House">House</option>
-            <option value="Apartment">Apartment</option>
-            <option value="Commercial">Commercial</option>
-            <option value="Plot / Land">Plot / Land</option>
-          </select>
-        </div>
-      </div>
+  <!-- SECTION 1: LIVE GLOBAL PROPERTY LISTINGS -->
+  <div class="section-title">
+    <span>🌍 Live Global Property Listings</span>
+    <a href="#register-section" style="background:var(--accent); color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:14px;">➕ Post Property Below</a>
+  </div>
 
-      <div class="property-grid" id="propertyGrid">
-        <!-- Property cards will load here dynamically -->
-      </div>
-    </section>
-
-    <!-- Data Entry Form Section -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProps('All', this)">All Properties</button>
+    <button class="filter-btn" onclick="filterProps('Commercial', this)">Commercial</button>
+    <button class="filter-btn" onclick="filterProps('Domestic', this)">Domestic</button>
+    <button class="filter-btn" onclick="filterProps('Industrial', this)">Industrial</button>
+    <button class="filter-btn" onclick="filterProps('Agricultural / Other', this)">Agricultural / Other</button>
