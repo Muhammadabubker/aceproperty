@@ -147,3 +147,148 @@
     <button class="filter-btn" onclick="filterProps('Domestic', this)">Domestic</button>
     <button class="filter-btn" onclick="filterProps('Industrial', this)">Industrial</button>
     <button class="filter-btn" onclick="filterProps('Agricultural / Other', this)">Agricultural / Other</button>
+
+    <div class="caution-banner">
+
+    <!-- STANDALONE DATA ENTRY FORM (ACE PROPERTY) -->
+<div id="register-section" style="max-width: 1180px; margin: 20px auto; background: #ffffff; padding: 26px; border-radius: 10px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); border-top: 4px solid #0f2942; font-family: 'Segoe UI', Tahoma, sans-serif;">
+  <h2 style="color: #0f2942; margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">
+    📝 ACE PROPERTY — Data Entry Form (Seller, Buyer, Landlord, Tenant)
+  </h2>
+
+  <form id="property-form" onsubmit="handleFormSubmit(event)">
+    <!-- Row 1: Role, Category, Road -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">I am a (Role) *</label>
+        <select id="role" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <option value="Seller">Seller (Direct Owner)</option>
+          <option value="Buyer">Buyer (Want to Purchase)</option>
+          <option value="Landlord">Landlord (Property for Rent)</option>
+          <option value="Tenant">Tenant (Need Property on Rent)</option>
+        </select>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Property Category *</label>
+        <select id="category" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <option value="Commercial">Commercial</option>
+          <option value="Domestic">Domestic</option>
+          <option value="Industrial">Industrial</option>
+          <option value="Agricultural / Other">Agricultural / Other (ETC)</option>
+        </select>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Road Location *</label>
+        <select id="road" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <option value="Main Road">Main Road</option>
+          <option value="Link Road">Link Road</option>
+          <option value="Corner / Boulevard">Corner / Boulevard</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 2: Demand, Rent, Installments & Time -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Demand Range (Sale Price) *</label>
+        <input type="text" id="demand" placeholder="e.g. PKR 1.8 Crore or $65,000" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Rent Required (If Rental)</label>
+        <input type="text" id="rent" placeholder="e.g. PKR 75,000/month or N/A" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Installments & Time Duration</label>
+        <input type="text" id="installments" placeholder="e.g. Cash / 24 Months Installments" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+    </div>
+
+    <!-- Row 3: Area, Covered Area, Condition -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Total Area (Marla / Kanal / Sq Ft) *</label>
+        <input type="text" id="area" placeholder="e.g. 10 Marla" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Covered Area</label>
+        <input type="text" id="coveredArea" placeholder="e.g. 3,400 Sq Ft" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Condition (Fresh, Repair, Old) *</label>
+        <select id="condition" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <option value="Fresh / Brand New">Fresh / Brand New</option>
+          <option value="Needs Repair">Repair Required</option>
+          <option value="Old Construction">Old Construction</option>
+          <option value="Open Plot">Open Plot</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 4: Floors/Shops, Rooms/Baths/Kitchens, Finish -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Floors & Shops</label>
+        <input type="text" id="floorsShops" placeholder="e.g. 2 Floors, 4 Shops" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Rooms, Baths & Kitchens</label>
+        <input type="text" id="roomsBaths" placeholder="e.g. 5 Rooms, 5 Baths, 2 Kitchens" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Finish (Tiles, Stone, Plaster)</label>
+        <select id="finish" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          <option value="Tiles & Plaster">Tiles & Plaster</option>
+          <option value="Marble / Stone">Marble / Stone</option>
+          <option value="Plain Plaster">Plain Plaster</option>
+          <option value="Tiles, Stone & Plaster Mixed">Tiles, Stone & Plaster Mixed</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 5: Approach/Conveyance, Qualities, Google Map Link -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Approach & Conveyance</label>
+        <input type="text" id="approach" placeholder="e.g. 60ft carpeted road, easy transport" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Qualities & City / Country *</label>
+        <input type="text" id="qualities" placeholder="e.g. Faisalabad Pakistan, Corner Plot" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Google Map Link or Coordinates *</label>
+        <input type="text" id="mapUrl" placeholder="Paste Google Maps link or 31.4187,73.0791" required style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+    </div>
+
+    <!-- Row 6: Utilities -->
+    <div style="margin-bottom: 16px;">
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Utilities Available:</label>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px;">
+        <label><input type="checkbox" value="Electricity Meter" class="util-chk"> Electricity Meter</label>
+        <label><input type="checkbox" value="Solar System" class="util-chk"> Solar System</label>
+        <label><input type="checkbox" value="Gas" class="util-chk"> Gas</label>
+        <label><input type="checkbox" value="Sewerage" class="util-chk"> Sewerage</label>
+      </div>
+    </div>
+
+    <!-- Row 7: 3+ Pictures, Video Clip, Google Map Screenshot -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 16px;">
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Upload at least 3 Actual Pictures *</label>
+        <input type="file" id="pictures" accept="image/*" multiple required onchange="validatePictures(this)" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+        <small id="pic-status" style="color: #64748b;">Minimum 3 actual photos required</small>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Upload Short Video Clip (Optional)</label>
+        <input type="file" id="videoClip" accept="video/*" style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label style="font-size: 13px; font-weight: 700; margin-bottom: 5px;">Upload Google Map Short Screen *</label>
+        <input type="file" id="mapScreenshot" accept="image/*" required style="padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+      </div>
+    </div>
+
+    <!-- Row 8: Dual Phone Numbers (1st Agent Public, 2nd Owner Hidden) -->
+    <h3 style="margin: 18px 0 10px; color: #0f2942; font-size: 16px;">📞 Dual Contact Numbers & Address Details</h3>
+</div>
