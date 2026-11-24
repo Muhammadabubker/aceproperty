@@ -329,3 +329,101 @@
     🚀 Publish Property Globally on ACE PROPERTY
   </button>
 </div>
+const CLOUDINARY_CLOUD_NAME = "tulzvcya"; 
+const CLOUDINARY_UPLOAD_PRESET = "aceproperty_unsigned";
+
+// Uploads any photo or video clip to free Cloudinary storage
+async function uploadToFreeStorage(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+  const response = await fetch(
+    `https://cloudinary.com{CLOUDINARY_CLOUD_NAME}/auto/upload`,
+    { method: "POST", body: formData }
+  );
+
+  if (!response.ok) throw new Error("Media upload failed. Check Cloudinary unsigned preset.");
+  const data = await response.json();
+  return data.secure_url;
+}
+
+// Saves media to Cloudinary + property details to Firebase Firestore
+window.handleFormSubmit = async function (e) {
+  e.preventDefault();
+  const picFiles = document.getElementById("pictures").files;
+  if (picFiles.length < 3) {
+    alert("Please select at least 3 actual pictures.");
+    return;
+  }
+
+  const btn = e.target.querySelector("button[type='submit']");
+  btn.disabled = true;
+  btn.innerText = "Uploading 3+ Pictures & Saving to Free Cloud...";
+
+  try {
+    const propCode = "ACE-" + Math.floor(1000 + Math.random() * 9000);
+    const imageUrls = [];
+
+    // 1. Upload all 3+ actual pictures
+    for (let i = 0; i < picFiles.length; i++) {
+      imageUrls.push(await uploadToFreeStorage(picFiles[i]));
+    }
+
+    // 2. Upload Google Map short screen
+    let mapShotUrl = "";
+    const mapFile = document.getElementById("mapScreenshot").files[0];
+    if (mapFile) {
+      mapShotUrl = await uploadToFreeStorage(mapFile);
+    }
+
+    // 3. Upload optional video clip
+    let videoUrl = "";
+    const vidFile = document.getElementById("videoClip").files[0];
+    if (vidFile) {
+      videoUrl = await uploadToFreeStorage(vidFile);
+    }
+
+    const utilities = Array.from(document.querySelectorAll(".util-chk:checked"))
+      .map(c => c.value)
+      .join(", ");
+
+    // 4. Save all property fields + media URLs to Firestore
+    await addDoc(collection(db, "properties"), {
+      id: propCode,
+      role: document.getElementById("role").value,
+      category: document.getElementById("category").value,
+      road: document.getElementById("road").value,
+      demand: document.getElementById("demand").value,
+      rent: document.getElementById("rent").value || "N/A",
+      installments: document.getElementById("installments").value || "Cash Only",
+      area: document.getElementById("area").value,
+      coveredArea: document.getElementById("coveredArea").value || "N/A",
+      condition: document.getElementById("condition").value,
+      floorsShops: document.getElementById("floorsShops").value || "N/A",
+      roomsBaths: document.getElementById("roomsBaths").value || "N/A",
+      finish: document.getElementById("finish").value,
+      approach: document.getElementById("approach").value || "N/A",
+      qualities: document.getElementById("qualities").value,
+      utilities: utilities || "Standard",
+      mapUrl: document.getElementById("mapUrl").value,
+      images: imageUrls,
+      mapShotUrl: mapShotUrl,
+      videoUrl: videoUrl,
+      agentPhone: document.getElementById("agentPhone").value,
+      ownerPhone: document.getElementById("ownerPhone").value,
+      exactAddress: document.getElementById("exactAddress").value,
+      createdAt: Date.now()
+    });
+
+    alert("Success! Property " + propCode + " is saved in free cloud storage and live globally.");
+    document.getElementById("property-form").reset();
+    await loadCloudProperties();
+  } catch (err) {
+    console.error("Cloud Save Error:", err);
+    alert("Error saving property: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "🚀 Publish Property Globally on ACE PROPERTY";
+  }
+};
