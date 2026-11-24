@@ -427,3 +427,12 @@ window.handleFormSubmit = async function (e) {
     btn.innerText = "🚀 Publish Property Globally on ACE PROPERTY";
   }
 };
+<script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getFirestore, collection, addDoc, getDocs } from "https://gstatic.com";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  // Place uploadToFreeStorage(), handleFormSubmit(), and loadCloudProperties() inside this tag
+</script>
+</body>
