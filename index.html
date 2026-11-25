@@ -10,7 +10,7 @@
   <meta name="keywords" content="ACE PROPERTY, direct owner property, no commission real estate, commercial plots, domestic houses, industrial land, installment property Pakistan global, Zillow alternative, Zameen alternative">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://web.app">
-
+  <link rel="canonical" href="https://github.io">
   <!-- Open Graph / Social Media Sharing -->
   <meta property="og:title" content="ACE PROPERTY | Direct Owners Contact — No Commission">
   <meta property="og:description" content="Global property portal for Sellers, Buyers, Landlords, and Tenants. Verified Google Maps locations and direct owner contacts.">
@@ -437,6 +437,44 @@ window.handleFormSubmit = async function (e) {
   }
 };
 <script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getAnalytics } from "https://gstatic.com";
+  import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, increment, query, orderBy } from "https://gstatic.com";
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
+    authDomain: "://firebaseapp.com",
+    databaseURL: "https://firebaseio.com",
+    projectId: "aceproperty-8a02d",
+    storageBucket: "aceproperty-8a02d.firebasestorage.app",
+    messagingSenderId: "195642216443",
+    appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
+    measurementId: "G-RDT5E0XYQC"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  const CLOUDINARY_URL = "https://cloudinary.com";
+  const UPLOAD_PRESET = "aceproperty_unsigned";
+
+  async function uploadMedia(file) {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", UPLOAD_PRESET);
+    const res = await fetch(CLOUDINARY_URL, { method: "POST", body: fd });
+    if (!res.ok) throw new Error("Cloudinary upload failed");
+    return (await res.json()).secure_url;
+  }
+
+  // Attach your handleFormSubmit, loadCloudProperties, and OTP functions here
+</script>
+</body>
+</html>
+
   import { initializeApp } from "https://gstatic.com";
   import { getFirestore, collection, addDoc, getDocs } from "https://gstatic.com";
 
