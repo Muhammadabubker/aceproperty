@@ -10,6 +10,8 @@
   <meta name="keywords" content="ACE PROPERTY, direct owner property, no commission real estate, commercial plots, domestic houses, industrial land, installment property Pakistan global, Zillow alternative, Zameen alternative">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://github.io">
+  <script async src="https://googletagmanager.com"></script>
+
   
   <meta property="og:title" content="ACE PROPERTY | Direct Owners Contact — No Commission">
   <meta property="og:description" content="Global property portal for Sellers, Buyers, Landlords, and Tenants. Verified Google Maps locations and direct owner contacts.">
@@ -139,6 +141,12 @@
     <div class="counter-box">🏭 Industrial: <strong id="ind-count">0</strong></div>
   </div>
 </header>
+<!-- 1. Caution Banner + Global Listings Grid -->
+<div class="caution-banner">Pay $10 (PKR eq.) via JazzCash/EasyPaisa/SadaPay to 03006604229 or $25 Foreign + OTP to unlock Owner No.</div>
+<div class="container">
+  <div id="listings-grid" class="listings-grid"></div>
+  <!-- 2. Paste your Data Entry Form (#register-section) here -->
+</div>
 
 <div class="caution-banner">
   <strong>⚠️ CAUTION & DIRECT OWNER VERIFICATION POLICY:</strong>
@@ -336,5 +344,13 @@
     </form>
   </div>
 </div>
+<script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getFirestore, collection, addDoc, getDocs } from "https://gstatic.com";
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com";
+  const uploadEndpoint = "https://cloudinary.com";
+  // Place your uploadMedia(), handleFormSubmit(), loadCloudProperties(), and OTP verification functions here
+</script>
+</body></html>
 
 <!-- PAYMENT & OTP UNLOCK MODAL -->
