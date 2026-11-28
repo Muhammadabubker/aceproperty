@@ -387,3 +387,221 @@
     }
 
     .prop-card:hover {
+  <!-- Search Bar -->
+  <div class="hero-search-box">
+    <select id="hero-cat">
+      <option value="All">All Categories</option>
+      <option value="Commercial">Commercial</option>
+      <option value="Domestic">Domestic</option>
+      <option value="Industrial">Industrial</option>
+      <option value="Agricultural / Other">Agricultural / Other</option>
+    </select>
+    <input type="text" id="hero-query" placeholder="Search city, society, plot size, or ACE code...">
+    <button type="button" class="hero-search-btn" onclick="applyHeroSearch()">Search</button>
+  </div>
+
+  <!-- Live Stats -->
+  <div class="counters">
+    <div class="counter-box">Global Visitors:<strong id="visitor-count">1,050</strong></div>
+    <div class="counter-box">Total Listed:<strong id="total-count">0</strong></div>
+    <div class="counter-box">Commercial:<strong id="comm-count">0</strong></div>
+    <div class="counter-box">Domestic:<strong id="dom-count">0</strong></div>
+    <div class="counter-box">Industrial:<strong id="ind-count">0</strong></div>
+  </div>
+</header>
+
+<div id="policy-section" class="caution-banner">
+  <strong>DIRECT OWNER VERIFICATION POLICY:</strong> Every property shows the <strong>Agent/Reference Phone</strong> publicly, while the <strong>Direct Owner Phone & Exact Address</strong> stay protected. Pay <strong>$10 (or PKR equivalent)</strong> locally via <strong>JazzCash / EasyPaisa / SadaPay (03006604229)</strong> or <strong>$25 International</strong> and verify with <strong>Firebase OTP</strong> to unlock owner details.
+</div>
+
+<main class="container">
+
+  <!-- SECTION 1: LIVE LISTINGS -->
+  <section id="listings-section">
+    <div class="section-title">
+      <span>Live Global Property Listings</span>
+      <a href="#register-section" style="background:var(--accent); color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:14px;">+ Post Property</a>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProps('All', this)">All</button>
+      <button class="filter-btn" onclick="filterProps('Commercial', this)">Commercial</button>
+      <button class="filter-btn" onclick="filterProps('Domestic', this)">Domestic</button>
+      <button class="filter-btn" onclick="filterProps('Industrial', this)">Industrial</button>
+      <button class="filter-btn" onclick="filterProps('Agricultural / Other', this)">Agricultural / Other</button>
+      <input type="text" id="search-box" class="search-input" placeholder="Filter by city, area, or code..." onkeyup="renderListings()">
+    </div>
+
+    <div id="listings-grid" class="listings-grid">
+      <p style="color:#64748b; padding:20px;">Connecting to ACE PROPERTY Cloud...</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: REAL ESTATE CALCULATORS -->
+  <section id="tools-section">
+    <div class="section-title">
+      <span>Property Tools & Calculators</span>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3>Area Unit Converter</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Convert Marla, Kanal, Sq. Ft., and Sq. Yards (272.25 sq ft/Marla standard).</p>
+        <div class="tool-row">
+          <input type="number" id="conv-val" value="10" min="0" oninput="convertArea()">
+          <select id="conv-unit" onchange="convertArea()">
+            <option value="marla">Marla</option>
+            <option value="kanal">Kanal</option>
+            <option value="sqft">Sq. Ft.</option>
+            <option value="sqyd">Sq. Yards</option>
+          </select>
+        </div>
+        <div id="conv-output" class="tool-result">10 Marla = 0.50 Kanal | 2,722.5 Sq. Ft. | 302.5 Sq. Yd.</div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Installment Plan Estimator</h3>
+        <p style="font-size:12.5px; color:var(--text-muted);">Estimate monthly installments after down payment.</p>
+        <div class="tool-row">
+          <input type="number" id="inst-total" placeholder="Total Price" value="10000000" oninput="calcInstallment()">
+          <input type="number" id="inst-down" placeholder="Down Payment" value="2500000" oninput="calcInstallment()">
+        </div>
+        <div class="tool-row">
+          <input type="number" id="inst-months" placeholder="Months" value="24" min="1" oninput="calcInstallment()">
+        </div>
+        <div id="inst-output" class="tool-result">Monthly Installment: 312,500 / month</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: PROPERTY SUBMISSION FORM -->
+  <section id="register-section" class="card">
+    <h2 style="color: var(--primary); margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">
+      Post Property Record (Seller, Buyer, Landlord, Tenant)
+    </h2>
+
+    <form id="property-form" onsubmit="handleFormSubmit(event)">
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Role *</label>
+          <select id="role" required>
+            <option value="Seller">Seller (Direct Owner)</option>
+            <option value="Buyer">Buyer (Want to Buy)</option>
+            <option value="Landlord">Landlord (For Rent)</option>
+            <option value="Tenant">Tenant (Need on Rent)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="category" required>
+            <option value="Commercial">Commercial</option>
+            <option value="Domestic">Domestic</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Agricultural / Other">Agricultural / Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Road Access *</label>
+          <select id="road" required>
+            <option value="Main Road">Main Road</option>
+            <option value="Link Road">Link Road</option>
+            <option value="Corner / Boulevard">Corner / Boulevard</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Sale Demand *</label>
+          <input type="text" id="demand" placeholder="e.g. PKR 1.8 Crore or $65,000" required>
+        </div>
+        <div class="form-group">
+          <label>Monthly Rent (If Rental)</label>
+          <input type="text" id="rent" placeholder="e.g. PKR 75,000/month or N/A">
+        </div>
+        <div class="form-group">
+          <label>Installments & Duration</label>
+          <input type="text" id="installments" placeholder="e.g. Cash / 24 Months">
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Total Area *</label>
+          <input type="text" id="area" placeholder="e.g. 10 Marla" required>
+        </div>
+        <div class="form-group">
+          <label>Covered Area</label>
+          <input type="text" id="coveredArea" placeholder="e.g. 3,400 Sq Ft">
+        </div>
+        <div class="form-group">
+          <label>Condition *</label>
+          <select id="condition">
+            <option value="Fresh / Brand New">Fresh / Brand New</option>
+            <option value="Needs Repair">Repair Required</option>
+            <option value="Old Construction">Old Construction</option>
+            <option value="Open Plot">Open Plot</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Floors & Shops</label>
+          <input type="text" id="floorsShops" placeholder="e.g. 2 Floors, 4 Shops">
+        </div>
+        <div class="form-group">
+          <label>Rooms, Baths & Kitchens</label>
+          <input type="text" id="roomsBaths" placeholder="e.g. 5 Rooms, 5 Baths, 2 Kitchens">
+        </div>
+        <div class="form-group">
+          <label>Finish Type</label>
+          <select id="finish">
+            <option value="Tiles & Plaster">Tiles & Plaster</option>
+            <option value="Marble / Stone">Marble / Stone</option>
+            <option value="Plain Plaster">Plain Plaster</option>
+            <option value="Mixed Finish">Mixed Finish</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Approach & Transport</label>
+          <input type="text" id="approach" placeholder="e.g. 60ft wide road">
+        </div>
+        <div class="form-group">
+          <label>Features & City / Country *</label>
+          <input type="text" id="qualities" placeholder="e.g. Faisalabad Pakistan, Corner Plot" required>
+        </div>
+        <div class="form-group">
+          <label>Google Map Link or Coordinates *</label>
+          <input type="text" id="mapUrl" placeholder="Paste Google Maps link or 31.4187,73.0791" required>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label>Available Utilities:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" value="Electricity Meter" class="util-chk"> Electricity Meter</label>
+          <label><input type="checkbox" value="Solar System" class="util-chk"> Solar System</label>
+          <label><input type="checkbox" value="Gas" class="util-chk"> Gas</label>
+          <label><input type="checkbox" value="Sewerage" class="util-chk"> Sewerage</label>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Actual Pictures (Minimum 3) *</label>
+          <input type="file" id="pictures" accept="image/*" multiple required onchange="validatePictures(this)">
+          <small id="pic-status" style="color: #64748b;">Select at least 3 photos</small>
+        </div>
+        <div class="form-group">
+          <label>Short Video Clip (Optional)</label>
+          <input type="file" id="videoClip" accept="video/*">
+        </div>
+        <div class="form-group">
+          <label>Google Map Screenshot *</label>
+          <input type="file" id="mapScreenshot" accept="image/*" required>
+        </div>
+      </div>
+
