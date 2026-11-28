@@ -30,10 +30,6 @@ if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;font-weight:bold;">Conne
   const analytics = getAnalytics(app);
 </script>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
 const CLOUDINARY_CLOUD_NAME = "tulzvcya";
 const CLOUDINARY_UPLOAD_PRESET = "aceproperty_unsigned";
 
