@@ -5,18 +5,20 @@
   <meta name="google-site-verification" content="google0181069514a3e6f4" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <!-- SEO Friendly Meta Tags & SSL Security -->
   <title>ACE PROPERTY | Direct Owners Contact — No Commission | Global Real Estate</title>
   <meta name="description" content="Buy, sell, and rent Commercial, Domestic, and Industrial properties globally on ACE PROPERTY. Direct Owners contact with no commission, Google Maps pins, 3+ photos, and installment plans.">
   <meta name="keywords" content="ACE PROPERTY, direct owner property, no commission real estate, commercial plots, domestic houses, industrial land, installment property Pakistan global, Zillow alternative, Zameen alternative">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://github.io">
-  <script async src="https://googletagmanager.com"></script>
-
   
+  <!-- Open Graph / Social Media Sharing -->
   <meta property="og:title" content="ACE PROPERTY | Direct Owners Contact — No Commission">
   <meta property="og:description" content="Global property portal for Sellers, Buyers, Landlords, and Tenants. Verified Google Maps locations and direct owner contacts.">
+  <meta property="og:url" content="https://github.io">
   <meta property="og:type" content="website">
 
+  <!-- Google Analytics (gtag.js) Linked to Your Measurement ID -->
   <script async src="https://googletagmanager.com"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,6 +27,7 @@
     gtag('config', 'G-RDT5E0XYQC');
   </script>
 
+  <!-- Schema.org JSON-LD Structured Data for ACE PROPERTY -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,6 +54,7 @@
     ]
   }
   </script>
+
   <style>
     :root {
       --primary: #0f2942;
@@ -128,7 +132,6 @@
   </style>
 </head>
 <body>
-<body>
 
 <header>
   <h1>ACE PROPERTY</h1>
@@ -141,12 +144,6 @@
     <div class="counter-box">🏭 Industrial: <strong id="ind-count">0</strong></div>
   </div>
 </header>
-<!-- 1. Caution Banner + Global Listings Grid -->
-<div class="caution-banner">Pay $10 (PKR eq.) via JazzCash/EasyPaisa/SadaPay to 03006604229 or $25 Foreign + OTP to unlock Owner No.</div>
-<div class="container">
-  <div id="listings-grid" class="listings-grid"></div>
-  <!-- 2. Paste your Data Entry Form (#register-section) here -->
-</div>
 
 <div class="caution-banner">
   <strong>⚠️ CAUTION & DIRECT OWNER VERIFICATION POLICY:</strong>
@@ -156,201 +153,3 @@
 <div class="container">
 
   <!-- SECTION 1: LIVE GLOBAL PROPERTY LISTINGS -->
-  <div class="section-title">
-    <span>🌍 Live Global Property Listings</span>
-    <a href="#register-section" style="background:var(--accent); color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:14px;">➕ Post Property Below</a>
-  </div>
-
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterProps('All', this)">All Properties</button>
-    <button class="filter-btn" onclick="filterProps('Commercial', this)">Commercial</button>
-    <button class="filter-btn" onclick="filterProps('Domestic', this)">Domestic</button>
-    <button class="filter-btn" onclick="filterProps('Industrial', this)">Industrial</button>
-    <button class="filter-btn" onclick="filterProps('Agricultural / Other', this)">Agricultural / Other</button>
-    <input type="text" id="search-box" class="search-input" placeholder="🔍 Search city, area, or code..." onkeyup="renderListings()">
-  </div>
-
-  <!-- LIVE PROPERTY CARDS APPEAR HERE -->
-  <div id="listings-grid" class="listings-grid">
-    <p style="color:#64748b; padding:20px;">Loading live properties from ACE PROPERTY Cloud...</p>
-  </div>
-
-  <!-- SECTION 2: DATA ENTRY FORM -->
-  <div id="register-section" class="card">
-    <h2 style="color: #0f2942; margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">
-      📝 ACE PROPERTY — Data Entry Form (Seller, Buyer, Landlord, Tenant)
-    </h2>
-
-    <form id="property-form" onsubmit="handleFormSubmit(event)">
-      <!-- Row 1: Role, Category, Road -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>I am a (Role) *</label>
-          <select id="role" required>
-            <option value="Seller">Seller (Direct Owner)</option>
-            <option value="Buyer">Buyer (Want to Purchase)</option>
-            <option value="Landlord">Landlord (Property for Rent)</option>
-            <option value="Tenant">Tenant (Need Property on Rent)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Property Category *</label>
-          <select id="category" required>
-            <option value="Commercial">Commercial</option>
-            <option value="Domestic">Domestic</option>
-            <option value="Industrial">Industrial</option>
-            <option value="Agricultural / Other">Agricultural / Other (ETC)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Road Location *</label>
-          <select id="road" required>
-            <option value="Main Road">Main Road</option>
-            <option value="Link Road">Link Road</option>
-            <option value="Corner / Boulevard">Corner / Boulevard</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Row 2: Demand, Rent, Installments & Time -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>Demand Range (Sale Price) *</label>
-          <input type="text" id="demand" placeholder="e.g. PKR 1.8 Crore or $65,000" required>
-        </div>
-        <div class="form-group">
-          <label>Rent Required (If Rental)</label>
-          <input type="text" id="rent" placeholder="e.g. PKR 75,000/month or N/A">
-        </div>
-        <div class="form-group">
-          <label>Installments & Time Duration</label>
-          <input type="text" id="installments" placeholder="e.g. Cash / 24 Months Installments">
-        </div>
-      </div>
-
-      <!-- Row 3: Area, Covered Area, Condition -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>Total Area (Marla / Kanal / Sq Ft) *</label>
-          <input type="text" id="area" placeholder="e.g. 10 Marla" required>
-        </div>
-        <div class="form-group">
-          <label>Covered Area</label>
-          <input type="text" id="coveredArea" placeholder="e.g. 3,400 Sq Ft">
-        </div>
-        <div class="form-group">
-          <label>Condition (Fresh, Repair, Old) *</label>
-          <select id="condition">
-            <option value="Fresh / Brand New">Fresh / Brand New</option>
-            <option value="Needs Repair">Repair Required</option>
-            <option value="Old Construction">Old Construction</option>
-            <option value="Open Plot">Open Plot</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Row 4: Floors/Shops, Rooms/Baths/Kitchens, Finish -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>Floors & Shops</label>
-          <input type="text" id="floorsShops" placeholder="e.g. 2 Floors, 4 Shops">
-        </div>
-        <div class="form-group">
-          <label>Rooms, Baths & Kitchens</label>
-          <input type="text" id="roomsBaths" placeholder="e.g. 5 Rooms, 5 Baths, 2 Kitchens">
-        </div>
-        <div class="form-group">
-          <label>Finish (Tiles, Stone, Plaster)</label>
-          <select id="finish">
-            <option value="Tiles & Plaster">Tiles & Plaster</option>
-            <option value="Marble / Stone">Marble / Stone</option>
-            <option value="Plain Plaster">Plain Plaster</option>
-            <option value="Tiles, Stone & Plaster Mixed">Tiles, Stone & Plaster Mixed</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Row 5: Approach/Conveyance, Qualities, Google Map Link -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>Approach & Conveyance</label>
-          <input type="text" id="approach" placeholder="e.g. 60ft carpeted road, easy transport">
-        </div>
-        <div class="form-group">
-          <label>Qualities & City / Country *</label>
-          <input type="text" id="qualities" placeholder="e.g. Faisalabad Pakistan, Corner Plot" required>
-        </div>
-        <div class="form-group">
-          <label>Google Map Link or Coordinates *</label>
-          <input type="text" id="mapUrl" placeholder="Paste Google Maps link or 31.4187,73.0791" required>
-        </div>
-      </div>
-
-      <!-- Row 6: Utilities -->
-      <div style="margin-bottom: 16px;">
-        <label>Utilities Available:</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" value="Electricity Meter" class="util-chk"> Electricity Meter</label>
-          <label><input type="checkbox" value="Solar System" class="util-chk"> Solar System</label>
-          <label><input type="checkbox" value="Gas" class="util-chk"> Gas</label>
-          <label><input type="checkbox" value="Sewerage" class="util-chk"> Sewerage</label>
-        </div>
-      </div>
-
-      <!-- Row 7: 3+ Pictures, Video Clip, Google Map Screenshot -->
-      <div class="grid-3">
-        <div class="form-group">
-          <label>Upload at least 3 Actual Pictures *</label>
-          <input type="file" id="pictures" accept="image/*" multiple required onchange="validatePictures(this)">
-          <small id="pic-status" style="color: #64748b;">Minimum 3 actual photos required</small>
-        </div>
-        <div class="form-group">
-          <label>Upload Short Video Clip (Optional)</label>
-          <input type="file" id="videoClip" accept="video/*">
-        </div>
-        <div class="form-group">
-          <label>Upload Google Map Short Screen *</label>
-          <input type="file" id="mapScreenshot" accept="image/*" required>
-        </div>
-      </div>
-
-      <!-- Row 8: Dual Phone Numbers & Submit Button INSIDE <form> -->
-      <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 18px; border-radius: 8px; margin-top: 18px;">
-        <h3 style="color: #0f2942; font-size: 16px; margin-bottom: 12px;">
-          📞 Dual Contact Numbers & Exact Address
-        </h3>
-
-        <div class="grid-3">
-          <div class="form-group">
-            <label style="color: #1e3a8a;">1st Phone No: Agent / Reference (Public) *</label>
-            <input type="tel" id="agentPhone" placeholder="e.g. +92-300-XXXXXXX" required style="border-color: #93c5fd; background: #eff6ff;">
-          </div>
-
-          <div class="form-group">
-            <label style="color: #b91c1c;">2nd Phone No: Direct Owner (Hidden) *</label>
-            <input type="tel" id="ownerPhone" placeholder="e.g. +92-300-6604229" required style="border-color: #fca5a5; background: #fef2f2;">
-          </div>
-
-          <div class="form-group">
-            <label style="color: #b91c1c;">Owner Name & Exact Address (Hidden) *</label>
-            <input type="text" id="exactAddress" placeholder="Owner Name, House/Plot #, Street, City" required style="border-color: #fca5a5; background: #fef2f2;">
-          </div>
-        </div>
-
-        <button type="submit" class="btn-submit">
-          🚀 Publish Property Globally on ACE PROPERTY
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-<script type="module">
-  import { initializeApp } from "https://gstatic.com";
-  import { getFirestore, collection, addDoc, getDocs } from "https://gstatic.com";
-  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com";
-  const uploadEndpoint = "https://cloudinary.com";
-  // Place your uploadMedia(), handleFormSubmit(), loadCloudProperties(), and OTP verification functions here
-</script>
-</body></html>
-
-<!-- PAYMENT & OTP UNLOCK MODAL -->
