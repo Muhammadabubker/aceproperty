@@ -5,16 +5,30 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "/firebase-aut
 const gridEl = document.getElementById("listings-grid");
 if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;font-weight:bold;">Connecting to ACE PROPERTY Database...</p>`;
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
-  authDomain: "://firebaseapp.com",
-  databaseURL: "https://firebaseio.com",
-  projectId: "aceproperty-8a02d",
-  storageBucket: "aceproperty-8a02d.firebasestorage.app",
-  messagingSenderId: "195642216443",
-  appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
-  measurementId: "G-RDT5E0XYQC"
-};
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
+    authDomain: "aceproperty-8a02d.firebaseapp.com",
+    databaseURL: "https://aceproperty-8a02d-default-rtdb.firebaseio.com",
+    projectId: "aceproperty-8a02d",
+    storageBucket: "aceproperty-8a02d.firebasestorage.app",
+    messagingSenderId: "195642216443",
+    appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
+    measurementId: "G-RDT5E0XYQC"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
