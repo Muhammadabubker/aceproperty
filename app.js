@@ -3,7 +3,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTim
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com";
 
 const gridEl = document.getElementById("listings-grid");
-if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;">Script loaded! Connecting to Firebase (aceproperty-8a02d)...</p>`;
+if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;font-weight:bold;">Connecting to ACE PROPERTY Database...</p>`;
 
 const firebaseConfig = {
   apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
@@ -32,11 +32,9 @@ async function uploadToCloudinary(file) {
   const fd = new FormData();
   fd.append("file", file);
   fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-  const res = await fetch(`https://cloudinary.com{CLOUDINARY_CLOUD_NAME}/auto/upload`, {
-    method: "POST",
-    body: fd
-  });
-  if (!res.ok) throw new Error("Cloudinary upload failed. Check preset 'aceproperty_unsigned'.");
+  const uploadUrl = "https://cloudinary.com" + CLOUDINARY_CLOUD_NAME + "/auto/upload";
+  const res = await fetch(uploadUrl, { method: "POST", body: fd });
+  if (!res.ok) throw new Error("Cloudinary upload failed. Verify preset 'aceproperty_unsigned' is Unsigned.");
   const data = await res.json();
   return data.secure_url;
 }
@@ -48,7 +46,7 @@ window.handleFormSubmit = async function(e) {
 
   const btn = e.target.querySelector("button[type='submit']");
   btn.disabled = true;
-  btn.innerText = "Uploading & Saving...";
+  btn.innerText = "Uploading Photos & Saving...";
 
   try {
     const propCode = "ACE-" + Math.floor(1000 + Math.random() * 9000);
@@ -92,7 +90,7 @@ window.handleFormSubmit = async function(e) {
       createdAt: serverTimestamp()
     });
 
-    alert("Published! Code: " + propCode);
+    alert("Published! Property Code: " + propCode);
     e.target.reset();
   } catch (err) {
     alert("Error: " + err.message);
@@ -140,7 +138,7 @@ window.renderListings = function() {
     const unlocked = unlockedIds.includes(p.id);
     const mapHref = (p.mapUrl || "").startsWith("http")
       ? p.mapUrl
-      : `https://google.com{encodeURIComponent(p.mapUrl || p.qualities)}`;
+      : "https://google.com" + encodeURIComponent(p.mapUrl || p.qualities);
 
     return `<div class="prop-card">
       <div class="gallery">
