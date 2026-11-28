@@ -2,33 +2,31 @@ import { initializeApp } from "/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "/firebase-firestore.js";
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "/firebase-auth.js";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://gstatic.com/firebase-firestore.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com/firebase-auth.js";
+
 const gridEl = document.getElementById("listings-grid");
-if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;font-weight:bold;">Connecting to ACE PROPERTY Database...</p>`;
+if (gridEl) {
+  gridEl.innerHTML = `<p style="color:#0f2942;font-weight:600;">Connecting to ACE PROPERTY Database...</p>`;
+}
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+const firebaseConfig = {
+  apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
+  authDomain: "aceproperty-8a02d.firebaseapp.com",
+  databaseURL: "https://aceproperty-8a02d-default-rtdb.firebaseio.com",
+  projectId: "aceproperty-8a02d",
+  storageBucket: "aceproperty-8a02d.firebasestorage.app",
+  messagingSenderId: "195642216443",
+  appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
+  measurementId: "G-RDT5E0XYQC"
+};
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyD-Use-VkEP4eXEEFQKtdZnNRdRRjMcldk",
-    authDomain: "aceproperty-8a02d.firebaseapp.com",
-    databaseURL: "https://aceproperty-8a02d-default-rtdb.firebaseio.com",
-    projectId: "aceproperty-8a02d",
-    storageBucket: "aceproperty-8a02d.firebasestorage.app",
-    messagingSenderId: "195642216443",
-    appId: "1:195642216443:web:ce5cfca78fd1c46d01855e",
-    measurementId: "G-RDT5E0XYQC"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 const CLOUDINARY_CLOUD_NAME = "tulzvcya";
 const CLOUDINARY_UPLOAD_PRESET = "aceproperty_unsigned";
@@ -52,7 +50,7 @@ async function uploadToCloudinary(file) {
 window.handleFormSubmit = async function(e) {
   e.preventDefault();
   const pics = document.getElementById("pictures").files;
-  if (pics.length < 3) return alert("Select at least 3 pictures.");
+  if (pics.length < 3) return alert("Please select at least 3 actual pictures.");
 
   const btn = e.target.querySelector("button[type='submit']");
   btn.disabled = true;
