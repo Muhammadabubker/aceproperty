@@ -26,7 +26,7 @@ async function uploadToCloudinary(file) {
   const fd = new FormData();
   fd.append("file", file);
   fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-  const res = await fetch(`https://cloudinary.com{CLOUDINARY_CLOUD_NAME}/auto/upload`, { method: "POST", body: fd });
+  const res = await fetch(`https://cloudinary.com{tulzvcya}/auto/upload`, { method: "POST", body: fd });
   if (!res.ok) throw new Error("Cloudinary upload failed.");
   return (await res.json()).secure_url;
 }
