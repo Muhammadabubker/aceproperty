@@ -1,60 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="google-site-verification" content="google0181069514a3e6f4" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Friendly Meta Tags & SSL Security -->
-  <title>ACE PROPERTY | Direct Owners Contact — No Commission | Global Real Estate</title>
-  <meta name="description" content="Buy, sell, and rent Commercial, Domestic, and Industrial properties globally on ACE PROPERTY. Direct Owners contact with no commission, Google Maps pins, 3+ photos, and installment plans.">
-  <meta name="keywords" content="ACE PROPERTY, direct owner property, no commission real estate, commercial plots, domestic houses, industrial land, installment property Pakistan global, Zillow alternative, Zameen alternative">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://github.io">
-  
-  <!-- Open Graph / Social Media Sharing -->
-  <meta property="og:title" content="ACE PROPERTY | Direct Owners Contact — No Commission">
-  <meta property="og:description" content="Global property portal for Sellers, Buyers, Landlords, and Tenants. Verified Google Maps locations and direct owner contacts.">
-  <meta property="og:url" content="https://github.io">
-  <meta property="og:type" content="website">
-
-  <!-- Google Analytics (gtag.js) Linked to Your Measurement ID -->
-  <script async src="https://googletagmanager.com"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-RDT5E0XYQC');
-  </script>
-
-  <!-- Schema.org JSON-LD Structured Data for ACE PROPERTY -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "RealEstateAgent",
-        "@id": "https://github.io#organization",
-        "name": "ACE PROPERTY",
-        "alternateName": "ACE PROPERTY Global Real Estate Portal",
-        "description": "Direct Owners Contact — No Commission. Buy, sell, and rent Commercial, Domestic, and Industrial properties globally with verified Google Maps pins and installment plans.",
-        "url": "https://github.io",
-        "telephone": "+92-300-6604229",
-        "areaServed": "Global"
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://github.io#website",
-        "url": "https://github.io",
-        "name": "ACE PROPERTY",
-        "publisher": {
-          "@id": "https://github.io#organization"
-        }
-      }
-    ]
-  }
-  </script>
-
   <style>
     :root {
       --primary: #0f2942;
@@ -102,7 +45,6 @@
     .badge-role { background: var(--accent); }
     .prop-price { font-size: 20px; font-weight: 800; color: var(--success); margin: 6px 0; }
     .prop-detail { font-size: 13px; margin-bottom: 4px; color: #334155; }
-    .map-embed { width: 100%; height: 130px; border: 1px solid var(--border); border-radius: 6px; margin: 8px 0; }
 
     /* Dual Phone Numbers Box */
     .agent-box { background: #eff6ff; border: 1px solid #bfdbfe; padding: 8px 12px; border-radius: 6px; font-size: 13px; margin-top: 8px; color: #1e3a8a; }
@@ -153,3 +95,63 @@
 <div class="container">
 
   <!-- SECTION 1: LIVE GLOBAL PROPERTY LISTINGS -->
+  <div class="section-title">
+    <span>🌍 Live Global Property Listings</span>
+    <a href="#register-section" style="background:var(--accent); color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:14px;">➕ Post Property Below</a>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProps('All', this)">All Properties</button>
+    <button class="filter-btn" onclick="filterProps('Commercial', this)">Commercial</button>
+    <button class="filter-btn" onclick="filterProps('Domestic', this)">Domestic</button>
+    <button class="filter-btn" onclick="filterProps('Industrial', this)">Industrial</button>
+    <button class="filter-btn" onclick="filterProps('Agricultural / Other', this)">Agricultural / Other</button>
+    <input type="text" id="search-box" class="search-input" placeholder="🔍 Search city, area, or code..." onkeyup="renderListings()">
+  </div>
+
+  <!-- LIVE PROPERTY CARDS CONTAINER -->
+  <div id="listings-grid" class="listings-grid">
+    <p style="color:#64748b; padding:20px;">Loading live properties from ACE PROPERTY Cloud...</p>
+  </div>
+
+  <!-- SECTION 2: DATA ENTRY FORM -->
+  <div id="register-section" class="card">
+    <h2 style="color: #0f2942; margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px;">
+      📝 ACE PROPERTY — Data Entry Form (Seller, Buyer, Landlord, Tenant)
+    </h2>
+
+    <form id="property-form" onsubmit="handleFormSubmit(event)">
+      <!-- Row 1: Role, Category, Road -->
+      <div class="grid-3">
+        <div class="form-group">
+          <label>I am a (Role) *</label>
+          <select id="role" required>
+            <option value="Seller">Seller (Direct Owner)</option>
+            <option value="Buyer">Buyer (Want to Purchase)</option>
+            <option value="Landlord">Landlord (Property for Rent)</option>
+            <option value="Tenant">Tenant (Need Property on Rent)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Property Category *</label>
+          <select id="category" required>
+            <option value="Commercial">Commercial</option>
+            <option value="Domestic">Domestic</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Agricultural / Other">Agricultural / Other (ETC)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Road Location *</label>
+          <select id="road" required>
+            <option value="Main Road">Main Road</option>
+            <option value="Link Road">Link Road</option>
+            <option value="Corner / Boulevard">Corner / Boulevard</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 2: Demand, Rent, Installments & Time -->
+      <div class="grid-3">
+        <div class="form-group">
+          <label>Demand Range (Sale Price) *</label>
