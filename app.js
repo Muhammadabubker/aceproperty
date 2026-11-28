@@ -1,6 +1,6 @@
-import { initializeApp } from "https://gstatic.com";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://gstatic.com";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://gstatic.com";
+import { initializeApp } from "/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "/firebase-firestore.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "/firebase-auth.js";
 
 const gridEl = document.getElementById("listings-grid");
 if (gridEl) gridEl.innerHTML = `<p style="color:#0f2942;font-weight:bold;">Connecting to ACE PROPERTY Database...</p>`;
